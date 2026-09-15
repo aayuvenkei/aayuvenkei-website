@@ -30,6 +30,13 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
+  <!-- ⚡ Cool-effects stack: GSAP + ScrollTrigger (scroll animations),
+       Lenis (buttery smooth scroll), Three.js (3D trishul hero) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <style>
     :root {
       --bg-dark: #040507;
@@ -100,6 +107,50 @@
         linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* 🌊 GLSL fluid energy shader — fixed full-page background, behind everything */
+    #fluidShaderCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    /* 🔱 Three.js 3D Trishul canvas, layered behind the rolling logo */
+    .trishul-3d-canvas {
+      position: absolute;
+      inset: -40%;
+      width: 180%;
+      height: 180%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* GSAP split-text helper: each letter gets its own inline-block span */
+    .split-char {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    /* Scroll-reveal targets start hidden; GSAP/ScrollTrigger animates them in */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* 🥁 Damru click-particle burst */
+    .damru-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      will-change: transform, opacity;
     }
 
     a {
@@ -1360,6 +1411,9 @@
 </head>
 <body>
 
+  <!-- 🌊 Live GLSL fluid energy shader background -->
+  <canvas id="fluidShaderCanvas"></canvas>
+
   <!-- Background grid overlay -->
   <div class="bg-canvas"></div>
 
@@ -1449,7 +1503,9 @@
 
         <!-- Right Side: Cosmic Mahadev Portal (Rolling Logo + Orbital Rings) -->
         <div class="hero-graphic-right">
-          <div class="cosmic-shiva-portal" title="aayuvenke🔱 Cosmic Chakra">
+          <div class="cosmic-shiva-portal" id="cosmicPortal" title="aayuvenke🔱 Cosmic Chakra">
+            <!-- 🔱 Three.js 3D Trishul, auto-rotating behind the logo -->
+            <canvas class="trishul-3d-canvas" id="trishulCanvas"></canvas>
             <div class="portal-outer-ring"></div>
             <div class="portal-inner-ring"></div>
             <!-- 🖼️ HERO BIG LOGO (Continuous Rolling Wheel) -->
@@ -1470,7 +1526,7 @@
     </section>
 
     <!-- Roles Badges Strip -->
-    <div class="roles-container">
+    <div class="roles-container reveal-up">
       <span class="role-badge"><i class="ph-bold ph-cpu"></i> AI Developer</span>
       <span class="role-badge"><i class="ph-bold ph-cloud"></i> Cloud Engineer</span>
       <span class="role-badge"><i class="ph-bold ph-shield-check"></i> Cyber Expert</span>
@@ -1490,7 +1546,7 @@
     </div>
 
     <!-- Lord Shiva Energy Section -->
-    <section class="section-header" id="shiva">
+    <section class="section-header reveal-up" id="shiva">
       <div class="section-tag">
         <i class="ph-bold ph-hands-praying"></i>
         Supreme Cosmic Energy
@@ -1881,7 +1937,7 @@
     </div>
 
     <!-- Connect Callout -->
-    <section class="connect-card" id="connect">
+    <section class="connect-card reveal-up" id="connect">
       <div class="shiva-pill" style="margin-bottom: 1.25rem;">
         <span class="pulsing-dot"></span>
         <span>Get in Touch</span>
@@ -2088,6 +2144,391 @@
       // 2. Initialize Scroll-Rolling Dome
       initScrollRollingDome();
     });
+  </script>
+
+  <!-- ============================================================
+       ⚡ COOL EFFECTS ENGINE
+       GSAP + ScrollTrigger, Lenis smooth scroll, Three.js 3D Trishul,
+       a live GLSL fluid shader background, and Web Audio damru sound.
+       ============================================================ -->
+  <script>
+    (function () {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ----------------------------------------------------------
+      // 1. LENIS — buttery smooth scroll, synced to GSAP's ticker
+      // ----------------------------------------------------------
+      let lenis = null;
+      if (window.Lenis && !prefersReducedMotion) {
+        lenis = new Lenis({
+          duration: 1.15,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        if (window.gsap) {
+          gsap.ticker.add((time) => lenis.raf(time * 1000));
+          gsap.ticker.lagSmoothing(0);
+        } else {
+          requestAnimationFrame(function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          });
+        }
+      }
+
+      // ----------------------------------------------------------
+      // 2. GSAP — letter-by-letter hero text + scroll reveals
+      // ----------------------------------------------------------
+      if (window.gsap) {
+        gsap.registerPlugin(ScrollTrigger);
+        if (lenis) lenis.on('scroll', ScrollTrigger.update);
+
+        // Split any element's text into per-character <span class="split-char">
+        const splitChars = (el) => {
+          if (!el) return [];
+          const raw = el.textContent;
+          el.textContent = '';
+          const frag = document.createDocumentFragment();
+          Array.from(raw).forEach((ch) => {
+            const span = document.createElement('span');
+            span.className = 'split-char';
+            span.textContent = ch === ' ' ? '\u00A0' : ch;
+            frag.appendChild(span);
+          });
+          el.appendChild(frag);
+          return el.querySelectorAll('.split-char');
+        };
+
+        const heroTl = gsap.timeline({ delay: 0.15 });
+
+        const welcomeChars = splitChars(document.querySelector('.welcome-script'));
+        if (welcomeChars.length) {
+          heroTl.from(welcomeChars, {
+            opacity: 0, y: 24, rotateX: -60, duration: 0.6,
+            stagger: 0.025, ease: 'back.out(1.6)',
+          }, 0);
+        }
+
+        const brandChars = splitChars(document.querySelector('.hero-brand-name'));
+        if (brandChars.length) {
+          heroTl.from(brandChars, {
+            opacity: 0, y: 50, rotateX: -90, scale: 0.6, duration: 0.9,
+            stagger: 0.045, ease: 'back.out(1.8)',
+          }, 0.15);
+        }
+
+        const authorSub = document.querySelector('.author-sub');
+        const shivaPill = document.querySelector('.shiva-pill');
+        const statCards = gsap.utils.toArray('.insta-stat-box');
+        const journeyBtn = document.querySelector('.journey-button');
+        const heroBadges = gsap.utils.toArray('.hero-pill-tag');
+
+        heroTl
+          .from(shivaPill, { opacity: 0, y: -16, duration: 0.6, ease: 'power2.out' }, 0)
+          .from(authorSub, { opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, 0.5)
+          .from(statCards, { opacity: 0, y: 30, duration: 0.7, stagger: 0.12, ease: 'power3.out' }, 0.6)
+          .from(journeyBtn, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, 0.95)
+          .from(heroBadges, { opacity: 0, x: 30, duration: 0.55, stagger: 0.08, ease: 'power2.out' }, 0.4)
+          .from('.cosmic-shiva-portal', { opacity: 0, scale: 0.7, duration: 1, ease: 'back.out(1.4)' }, 0.2);
+
+        // Fade + rise any .reveal-up element into view once, as it scrolls in
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+          gsap.to(el, {
+            opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          });
+        });
+
+        // Gentle stagger for skill/role chips as they enter view
+        gsap.utils.toArray('.role-badge').forEach((el, i) => {
+          gsap.from(el, {
+            opacity: 0, y: 16, duration: 0.5, delay: (i % 8) * 0.03, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+          });
+        });
+      }
+
+      // ----------------------------------------------------------
+      // 3. THREE.JS — small glowing 3D Trishul, auto-rotating
+      //    behind the hero logo portal
+      // ----------------------------------------------------------
+      const trishulCanvas = document.getElementById('trishulCanvas');
+      if (trishulCanvas && window.THREE) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+        camera.position.set(0, 0.4, 7);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: trishulCanvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const trishulGroup = new THREE.Group();
+
+        // Shaft
+        const shaftMat = new THREE.MeshStandardMaterial({
+          color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.6, metalness: 0.7, roughness: 0.3,
+        });
+        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 4.4, 16), shaftMat);
+        shaft.position.y = -0.8;
+        trishulGroup.add(shaft);
+
+        // Central prong
+        const prongMat = new THREE.MeshStandardMaterial({
+          color: 0x38bdf8, emissive: 0x00d2ff, emissiveIntensity: 0.9, metalness: 0.5, roughness: 0.25,
+        });
+        const centerProng = new THREE.Mesh(new THREE.ConeGeometry(0.16, 1.9, 16), prongMat);
+        centerProng.position.y = 2.1;
+        trishulGroup.add(centerProng);
+
+        // Side prongs (angled outward)
+        [-1, 1].forEach((side) => {
+          const prong = new THREE.Mesh(new THREE.ConeGeometry(0.14, 1.5, 16), prongMat.clone());
+          prong.position.set(side * 0.55, 1.55, 0);
+          prong.rotation.z = side * -0.38;
+          trishulGroup.add(prong);
+
+          const curveMat = new THREE.MeshStandardMaterial({
+            color: 0x35e89e, emissive: 0x35e89e, emissiveIntensity: 0.7, metalness: 0.6, roughness: 0.3,
+          });
+          const curve = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.9, 12), curveMat);
+          curve.position.set(side * 0.32, 1.05, 0);
+          curve.rotation.z = side * -0.55;
+          trishulGroup.add(curve);
+        });
+
+        // Crossbar / base ring near the shaft top
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(0.42, 0.035, 12, 32),
+          new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.7 })
+        );
+        ring.position.y = 1.1;
+        ring.rotation.x = Math.PI / 2;
+        trishulGroup.add(ring);
+
+        trishulGroup.rotation.z = -0.06;
+        scene.add(trishulGroup);
+
+        scene.add(new THREE.AmbientLight(0x223344, 1.1));
+        const key = new THREE.PointLight(0x00d2ff, 3.2, 12);
+        key.position.set(2.5, 3, 4);
+        scene.add(key);
+        const rim = new THREE.PointLight(0xfbbf24, 2.4, 12);
+        rim.position.set(-2.5, -1.5, 3);
+        scene.add(rim);
+
+        const resizeTrishul = () => {
+          const size = trishulCanvas.clientWidth || 340;
+          renderer.setSize(size, size, false);
+          camera.aspect = 1;
+          camera.updateProjectionMatrix();
+        };
+        resizeTrishul();
+        window.addEventListener('resize', resizeTrishul);
+
+        const clock = new THREE.Clock();
+        const animateTrishul = () => {
+          const t = clock.getElapsedTime();
+          trishulGroup.rotation.y = t * (prefersReducedMotion ? 0 : 0.5);
+          trishulGroup.position.y = Math.sin(t * 0.9) * 0.08;
+          renderer.render(scene, camera);
+          requestAnimationFrame(animateTrishul);
+        };
+        animateTrishul();
+      }
+
+      // ----------------------------------------------------------
+      // 4. GLSL — live fluid/energy shader as the page background
+      // ----------------------------------------------------------
+      const fluidCanvas = document.getElementById('fluidShaderCanvas');
+      if (fluidCanvas && window.THREE) {
+        const shaderScene = new THREE.Scene();
+        const shaderCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const shaderRenderer = new THREE.WebGLRenderer({ canvas: fluidCanvas, alpha: true, antialias: false });
+        shaderRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+        const fluidUniforms = {
+          uTime: { value: 0 },
+          uResolution: { value: new THREE.Vector2(1, 1) },
+        };
+
+        const fragmentShader = `
+          precision highp float;
+          uniform float uTime;
+          uniform vec2 uResolution;
+
+          // Lightweight value-noise based flow field, tinted in the
+          // site's cyan / gold / green palette.
+          float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+          }
+          float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            return mix(
+              mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+              u.y
+            );
+          }
+          float fbm(vec2 p) {
+            float v = 0.0;
+            float amp = 0.55;
+            for (int i = 0; i < 5; i++) {
+              v += amp * noise(p);
+              p *= 2.0;
+              amp *= 0.5;
+            }
+            return v;
+          }
+
+          void main() {
+            vec2 uv = gl_FragCoord.xy / uResolution.xy;
+            vec2 p = uv * 3.0;
+            p.x *= uResolution.x / uResolution.y;
+
+            float t = uTime * 0.06;
+            vec2 flow = vec2(fbm(p + t), fbm(p - t + 4.2));
+            float density = fbm(p + flow * 1.4 + t * 0.5);
+
+            vec3 cyan = vec3(0.0, 0.82, 1.0);
+            vec3 gold = vec3(0.98, 0.75, 0.14);
+            vec3 green = vec3(0.21, 0.91, 0.62);
+            vec3 deep = vec3(0.01, 0.02, 0.04);
+
+            vec3 color = mix(deep, cyan, smoothstep(0.25, 0.6, density));
+            color = mix(color, green, smoothstep(0.55, 0.8, density) * 0.6);
+            color = mix(color, gold, smoothstep(0.75, 0.95, density) * 0.5);
+
+            float vignette = smoothstep(1.1, 0.2, length(uv - 0.5));
+            color *= vignette;
+
+            gl_FragColor = vec4(color, density * 0.85);
+          }
+        `;
+
+        const vertexShader = `
+          void main() {
+            gl_Position = vec4(position, 1.0);
+          }
+        `;
+
+        const fluidMesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(2, 2),
+          new THREE.ShaderMaterial({
+            uniforms: fluidUniforms,
+            vertexShader,
+            fragmentShader,
+            transparent: true,
+          })
+        );
+        shaderScene.add(fluidMesh);
+
+        const resizeFluid = () => {
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          shaderRenderer.setSize(w, h, false);
+          fluidUniforms.uResolution.value.set(w, h);
+        };
+        resizeFluid();
+        window.addEventListener('resize', resizeFluid);
+
+        const animateFluid = (t) => {
+          fluidUniforms.uTime.value = t * 0.001;
+          shaderRenderer.render(shaderScene, shaderCamera);
+          requestAnimationFrame(animateFluid);
+        };
+        if (!prefersReducedMotion) requestAnimationFrame(animateFluid);
+        else animateFluid(0);
+      }
+
+      // ----------------------------------------------------------
+      // 5. WEB AUDIO — synthesized damru sound + particle burst,
+      //    fired when the cosmic portal is clicked
+      // ----------------------------------------------------------
+      const portal = document.getElementById('cosmicPortal');
+      if (portal) {
+        let audioCtx = null;
+
+        const playDamru = () => {
+          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          const now = audioCtx.currentTime;
+
+          // Two quick pitched thumps, like a damru's double-beat
+          [0, 0.12].forEach((offset) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(180, now + offset);
+            osc.frequency.exponentialRampToValueAtTime(60, now + offset + 0.18);
+            gain.gain.setValueAtTime(0.0001, now + offset);
+            gain.gain.exponentialRampToValueAtTime(0.5, now + offset + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.22);
+            osc.connect(gain).connect(audioCtx.destination);
+            osc.start(now + offset);
+            osc.stop(now + offset + 0.24);
+          });
+
+          // A short burst of filtered noise for the "crack"
+          const bufferSize = audioCtx.sampleRate * 0.12;
+          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+          }
+          const noise = audioCtx.createBufferSource();
+          noise.buffer = buffer;
+          const noiseFilter = audioCtx.createBiquadFilter();
+          noiseFilter.type = 'bandpass';
+          noiseFilter.frequency.value = 900;
+          const noiseGain = audioCtx.createGain();
+          noiseGain.gain.setValueAtTime(0.35, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+          noise.connect(noiseFilter).connect(noiseGain).connect(audioCtx.destination);
+          noise.start(now);
+        };
+
+        const spawnParticles = (x, y) => {
+          const colors = ['#00d2ff', '#fbbf24', '#35e89e', '#818cf8'];
+          for (let i = 0; i < 18; i++) {
+            const p = document.createElement('div');
+            p.className = 'damru-particle';
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.background = colors[i % colors.length];
+            p.style.boxShadow = `0 0 8px ${colors[i % colors.length]}`;
+            document.body.appendChild(p);
+
+            const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.3;
+            const dist = 60 + Math.random() * 90;
+            const dx = Math.cos(angle) * dist;
+            const dy = Math.sin(angle) * dist;
+
+            if (window.gsap) {
+              gsap.to(p, {
+                x: dx, y: dy, opacity: 0, scale: 0.2, duration: 0.8 + Math.random() * 0.4,
+                ease: 'power2.out',
+                onComplete: () => p.remove(),
+              });
+            } else {
+              p.style.transition = 'transform 0.8s ease-out, opacity 0.8s ease-out';
+              requestAnimationFrame(() => {
+                p.style.transform = `translate(${dx}px, ${dy}px) scale(0.2)`;
+                p.style.opacity = '0';
+              });
+              setTimeout(() => p.remove(), 850);
+            }
+          }
+        };
+
+        portal.addEventListener('click', (e) => {
+          playDamru();
+          spawnParticles(e.clientX, e.clientY);
+          if (window.gsap) {
+            gsap.fromTo(portal, { scale: 1 }, { scale: 1.06, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+          }
+        });
+      }
+    })();
   </script>
 
 </body>
