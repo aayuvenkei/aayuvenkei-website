@@ -78,7 +78,9 @@
     }
 
     html {
-      overflow-x: clip;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
     }
 
     body {
@@ -86,7 +88,8 @@
       color: var(--text-pure);
       font-family: var(--font-body);
       min-height: 100vh;
-      overflow-x: clip;
+      overflow-x: hidden;
+      width: 100%;
       line-height: 1.6;
       background-image: 
         radial-gradient(ellipse 90% 50% at 50% -10%, rgba(0, 210, 255, 0.18), transparent 75%),
@@ -94,6 +97,9 @@
         radial-gradient(circle 500px at 15% 55%, rgba(129, 140, 248, 0.1), transparent),
         radial-gradient(circle 800px at 50% 90%, rgba(0, 210, 255, 0.08), transparent);
       background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
     }
 
     /* Cyber-divine Grid & Starfield */
@@ -106,6 +112,8 @@
         linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
       pointer-events: none;
       z-index: 0;
+      width: 100%;
+      height: 100%;
     }
 
     /* 🌊 GLSL fluid energy shader — fixed full-page background, behind everything */
@@ -155,6 +163,7 @@
     a {
       color: inherit;
       text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .container {
@@ -178,6 +187,7 @@
       background: rgba(4, 5, 7, 0.88);
       border-bottom: 1px solid var(--border-subtle);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+      width: 100%;
     }
 
     .nav-inner {
@@ -185,6 +195,7 @@
       align-items: center;
       justify-content: space-between;
       height: 76px;
+      width: 100%;
     }
 
     .brand {
@@ -206,6 +217,7 @@
       border: 1.5px solid rgba(45, 212, 191, 0.45);
       box-shadow: 0 0 20px rgba(0, 210, 255, 0.4), 0 0 15px rgba(251, 191, 36, 0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
     }
 
     .brand-logo:hover {
@@ -256,6 +268,7 @@
       transition: all 0.25s ease;
       position: relative;
       letter-spacing: 0.02em;
+      white-space: nowrap;
     }
 
     .nav-link:hover {
@@ -295,6 +308,8 @@
       font-family: var(--font-display);
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
 
     .btn-epic {
@@ -305,7 +320,8 @@
       overflow: hidden;
     }
 
-    .btn-epic:hover {
+    .btn-epic:hover,
+    .btn-epic:active {
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 0 40px rgba(0, 210, 255, 0.7);
     }
@@ -323,6 +339,7 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 80px rgba(53, 232, 158, 0.07);
       overflow: hidden;
       margin-bottom: 5.5rem;
+      width: 100%;
     }
 
     /* Diagonal neon rays cutting across like screenshot */
@@ -364,6 +381,8 @@
         radial-gradient(circle 3px at 30% 85%, rgba(53, 232, 158, 0.4) 100%, transparent);
       pointer-events: none;
       z-index: 1;
+      width: 100%;
+      height: 100%;
     }
 
     .hero-layout {
@@ -374,11 +393,13 @@
       align-items: center;
       gap: 2.5rem;
       padding: 0 3.5rem;
+      width: 100%;
     }
 
     /* Left: The Exact Typography & 3 Stat Cards from Screenshot */
     .hero-content-left {
       max-width: 620px;
+      width: 100%;
     }
 
     .shiva-pill {
@@ -405,6 +426,7 @@
       border-radius: 50%;
       box-shadow: 0 0 10px var(--desi-green);
       animation: pulse 1.8s infinite;
+      flex-shrink: 0;
     }
 
     @keyframes pulse {
@@ -422,10 +444,6 @@
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
       position: relative;
       display: inline-block;
-    }
-
-    .welcome-script::after {
-      content: '';
     }
 
     /* Bold 3D "aayuvenke🔱" title like "Desi Gamers" in screenshot */
@@ -453,6 +471,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .author-sub strong {
@@ -465,6 +484,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1.15rem;
       margin-bottom: 1.25rem;
+      width: 100%;
     }
 
     .insta-stat-box {
@@ -482,6 +502,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      width: 100%;
     }
 
     .insta-stat-box::before {
@@ -496,13 +519,15 @@
       transition: opacity 0.3s ease;
     }
 
-    .insta-stat-box:hover {
+    .insta-stat-box:hover,
+    .insta-stat-box:active {
       transform: translateY(-5px);
       border-color: var(--desi-green);
       box-shadow: 0 20px 45px rgba(53, 232, 158, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
-    .insta-stat-box:hover::before {
+    .insta-stat-box:hover::before,
+    .insta-stat-box:active::before {
       opacity: 1;
     }
 
@@ -520,6 +545,7 @@
       border-radius: var(--radius-full);
       margin-bottom: 0.4rem;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .live-dot-green {
@@ -529,6 +555,7 @@
       border-radius: 50%;
       box-shadow: 0 0 8px #10b981;
       animation: pulse 1.4s infinite;
+      flex-shrink: 0;
     }
 
     .stat-number-big {
@@ -569,9 +596,11 @@
       backdrop-filter: blur(12px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(53, 232, 158, 0.08);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .journey-button:hover {
+    .journey-button:hover,
+    .journey-button:active {
       background: rgba(53, 232, 158, 0.15);
       border-color: var(--desi-green);
       transform: translateY(-3px);
@@ -583,7 +612,8 @@
       transition: transform 0.25s ease;
     }
 
-    .journey-button:hover i {
+    .journey-button:hover i,
+    .journey-button:active i {
       transform: translate(3px, -3px);
     }
 
@@ -595,6 +625,7 @@
       justify-content: center;
       height: 100%;
       min-height: 400px;
+      width: 100%;
     }
 
     /* 🖼️ HERO BIG LOGO (Continuous Rolling Cosmic Wheel) */
@@ -611,6 +642,7 @@
       justify-content: center;
       animation: floaty 6s ease-in-out infinite;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
     @keyframes floaty {
@@ -696,10 +728,12 @@
       gap: 0.4rem;
       backdrop-filter: blur(12px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
     }
 
     .hero-pill-tag i {
       color: var(--desi-green);
+      flex-shrink: 0;
     }
 
     /* Roles Bar below Hero */
@@ -709,6 +743,7 @@
       justify-content: center;
       gap: 0.75rem;
       margin-bottom: 5.5rem;
+      width: 100%;
     }
 
     .role-badge {
@@ -723,9 +758,12 @@
       align-items: center;
       gap: 0.45rem;
       transition: all 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
 
-    .role-badge:hover {
+    .role-badge:hover,
+    .role-badge:active {
       background: rgba(53, 232, 158, 0.12);
       border-color: var(--desi-green);
       color: var(--desi-green);
@@ -736,6 +774,7 @@
     .section-header {
       margin-bottom: 3rem;
       text-align: center;
+      width: 100%;
     }
 
     .section-tag {
@@ -769,9 +808,10 @@
     /* Lord Shiva Sacred Pillars */
     .shiva-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.75rem;
       margin-bottom: 6rem;
+      width: 100%;
     }
 
     .shiva-card {
@@ -783,6 +823,8 @@
       overflow: hidden;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       backdrop-filter: blur(14px);
+      -webkit-tap-highlight-color: transparent;
+      width: 100%;
     }
 
     .shiva-card::after {
@@ -797,14 +839,16 @@
       transition: opacity 0.35s ease;
     }
 
-    .shiva-card:hover {
+    .shiva-card:hover,
+    .shiva-card:active {
       background: var(--bg-card-hover);
       border-color: var(--desi-green);
       transform: translateY(-6px);
       box-shadow: 0 15px 40px -10px rgba(53, 232, 158, 0.25);
     }
 
-    .shiva-card:hover::after {
+    .shiva-card:hover::after,
+    .shiva-card:active::after {
       opacity: 1;
     }
 
@@ -821,6 +865,7 @@
       border: 1px solid rgba(53, 232, 158, 0.3);
       color: var(--desi-green);
       box-shadow: 0 0 25px rgba(53, 232, 158, 0.2);
+      flex-shrink: 0;
     }
 
     .icon-cyan {
@@ -852,32 +897,32 @@
     }
 
     /* ========================================================
-       CURVED DOME & SCROLL-PINNED ARSENAL (DesiGamers Slowed Scroll)
+       OPTIMIZED SKILLS ARSENAL (NO EMPTY SPACE)
        ======================================================== */
     .arsenal-scroll-runway {
       position: relative;
-      /* Tall wrapper + sticky stage = slowed-down scroll: the further you scroll
-         through this space, the further the skills swipe across the dome. */
-      height: 520vh;
+      /* ✅ FIXED: Auto height instead of 520vh */
+      height: auto;
       margin-top: 1.5rem;
       margin-bottom: 6rem;
+      width: 100%;
     }
 
     .arsenal-sticky-stage {
-      position: sticky;
-      top: 80px; /* locks below sticky navbar */
-      height: calc(100vh - 86px);
-      min-height: 620px;
-      max-height: 860px;
+      /* ✅ FIXED: Changed from sticky to relative */
+      position: relative;
+      height: auto;
+      min-height: auto;
       border-radius: var(--radius-lg);
       background: radial-gradient(circle at 50% 15%, #0d1b2e 0%, #060b17 55%, #020409 100%);
       border: 1px solid rgba(56, 189, 248, 0.22);
       box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), inset 0 0 90px rgba(56, 189, 248, 0.06);
-      overflow: hidden;
+      overflow: visible;
       padding: 2.2rem 1.5rem 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      width: 100%;
     }
 
     /* Dramatic Spotlights shining diagonally from top corners like screenshot */
@@ -910,6 +955,7 @@
       display: flex;
       justify-content: center;
       margin-bottom: 0.75rem;
+      width: 100%;
     }
 
     .stage-badge-disc {
@@ -928,9 +974,11 @@
       animation: badgePulse 4s ease-in-out infinite;
       cursor: pointer;
       transition: transform 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .stage-badge-disc:hover {
+    .stage-badge-disc:hover,
+    .stage-badge-disc:active {
       transform: scale(1.06);
     }
 
@@ -962,69 +1010,31 @@
       position: relative;
       z-index: 3;
       text-align: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 2.5rem;
+      width: 100%;
     }
 
     .stage-heading-block .section-title {
       font-size: clamp(1.6rem, 3vw, 2.3rem);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.85rem;
     }
 
-    /* Real-Time Scroll Status Pill */
-    .scroll-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--shiva-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 0.25rem 0.9rem;
-      border-radius: var(--radius-full);
-      text-transform: uppercase;
-      margin-top: 0.35rem;
-    }
-
-    .scroll-pulse-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--desi-green);
-      box-shadow: 0 0 8px var(--desi-green);
-      animation: pulse 1.4s infinite;
-    }
-
-    /* Scroll-Rolling 3D Arc Viewport */
-    .rolling-carousel-container {
+    /* ✅ FIXED: Skills Grid Layout (No Scroll Animation) */
+    .skills-grid-container {
       position: relative;
       z-index: 4;
       width: 100%;
       max-width: 1140px;
-      margin: 0 auto;
-      height: 360px;
-      perspective: 1200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none; /* Purely scroll-driven */
+      margin: 0 auto 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+      padding: 0 1rem;
     }
 
-    .rolling-cards-track {
-      position: relative;
+    /* The Skill Card */
+    .skill-card {
       width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* The Arc-Rolling Skill Card */
-    .rolling-skill-card {
-      position: absolute;
-      width: 325px;
-      height: 340px;
       background: linear-gradient(175deg, rgba(20, 28, 48, 0.92) 0%, rgba(10, 15, 26, 0.96) 100%);
       border: 1px solid rgba(56, 189, 248, 0.22);
       border-radius: 22px;
@@ -1034,14 +1044,17 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      will-change: transform, opacity, filter;
-      pointer-events: auto;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      min-height: 320px;
     }
 
-    .rolling-skill-card.active-card {
+    .skill-card:hover,
+    .skill-card:active {
       border: 2px solid var(--shiva-cyan);
       box-shadow: 0 25px 60px rgba(0, 210, 255, 0.4), 0 0 35px rgba(56, 189, 248, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      transform: translateY(-6px);
     }
 
     .card-top-row {
@@ -1049,6 +1062,7 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
+      width: 100%;
     }
 
     .card-icon-halo {
@@ -1063,6 +1077,7 @@
       font-size: 1.6rem;
       color: var(--shiva-cyan);
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+      flex-shrink: 0;
     }
 
     .card-category-badge {
@@ -1075,6 +1090,7 @@
       color: var(--desi-green);
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      white-space: nowrap;
     }
 
     .card-title-text {
@@ -1098,6 +1114,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
+      width: 100%;
     }
 
     .card-tag-pill {
@@ -1107,6 +1124,7 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #cbd5e1;
+      white-space: nowrap;
     }
 
     /* ========================================================
@@ -1115,7 +1133,7 @@
     .curved-dome-wrapper {
       position: relative;
       width: 100%;
-      margin-top: -65px;
+      margin-top: 3rem;
       z-index: 2;
       overflow: visible;
     }
@@ -1158,6 +1176,7 @@
       z-index: 3;
       max-width: 740px;
       margin: 0 auto;
+      width: 100%;
     }
 
     .dome-text-lead {
@@ -1196,9 +1215,11 @@
       animation: sealFloat 5s ease-in-out infinite;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .dome-strong-seal:hover {
+    .dome-strong-seal:hover,
+    .dome-strong-seal:active {
       transform: scale(1.08) rotate(3deg);
       box-shadow: 0 25px 60px rgba(56, 189, 248, 0.45), inset 0 0 35px rgba(255, 255, 255, 0.4);
     }
@@ -1247,6 +1268,7 @@
       margin-bottom: 6rem;
       backdrop-filter: blur(18px);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+      width: 100%;
     }
 
     .connect-title {
@@ -1271,6 +1293,7 @@
       justify-content: center;
       gap: 1.25rem;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .social-item {
@@ -1286,9 +1309,12 @@
       font-size: 0.95rem;
       transition: all 0.3s ease;
       font-family: var(--font-display);
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
 
-    .social-item:hover {
+    .social-item:hover,
+    .social-item:active {
       background: rgba(53, 232, 158, 0.15);
       border-color: var(--desi-green);
       transform: translateY(-4px);
@@ -1298,6 +1324,7 @@
 
     .social-item i {
       font-size: 1.3rem;
+      flex-shrink: 0;
     }
 
     /* Footer */
@@ -1307,6 +1334,7 @@
       background: rgba(4, 5, 7, 0.96);
       color: var(--text-dim);
       font-size: 0.9rem;
+      width: 100%;
     }
 
     .footer-content {
@@ -1315,6 +1343,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1.5rem;
+      width: 100%;
     }
 
     /* 🖼️ FOOTER LOGO STYLES */
@@ -1335,8 +1364,10 @@
       object-fit: cover;
       border: 1px solid rgba(251, 191, 36, 0.4);
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+      flex-shrink: 0;
     }
 
+    /* MOBILE RESPONSIVE */
     @media (max-width: 960px) {
       .hero-layout {
         grid-template-columns: 1fr;
@@ -1366,44 +1397,111 @@
       .stage-spotlight {
         width: 180px;
       }
+      .hero-role-badges-vertical {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      .skills-grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
     }
 
     @media (max-width: 600px) {
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
       .insta-stats-row {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
+      
       .hero-stage {
         padding: 3rem 0 3.5rem;
       }
+      
       .cosmic-shiva-portal {
         width: 260px;
         height: 260px;
       }
-      .arsenal-scroll-runway {
-        height: 440vh;
-      }
-      .arsenal-sticky-stage {
-        top: 70px;
-        height: calc(100vh - 74px);
-        min-height: 560px;
-        padding: 1.5rem 1rem 0;
-      }
-      .rolling-carousel-container {
-        height: 320px;
-      }
-      .rolling-skill-card {
-        width: 270px;
-        height: 310px;
-        padding: 1.4rem 1.15rem;
-      }
+      
       .curved-dome-horizon {
         width: 220%;
         margin-left: -60%;
         height: 360px;
         padding: 3.5rem 6% 2.5rem;
       }
+      
       .dome-strong-seal {
         display: none;
+      }
+      
+      .hero-layout {
+        padding: 0 1.25rem;
+      }
+      
+      .hero-role-badges-vertical {
+        gap: 0.5rem;
+      }
+      
+      .hero-pill-tag {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.8rem;
+      }
+      
+      .brand-title {
+        font-size: 1.1rem;
+      }
+      
+      .brand-domain {
+        font-size: 0.7rem;
+      }
+      
+      .btn {
+        font-size: 0.85rem;
+        padding: 0.7rem 1.3rem;
+      }
+      
+      .shiva-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .footer-content {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .skills-grid-container {
+        grid-template-columns: 1fr;
+        padding: 0 0.5rem;
+      }
+
+      .skill-card {
+        min-height: 280px;
+      }
+    }
+
+    /* ANDROID-SPECIFIC OPTIMIZATIONS */
+    @supports (-webkit-touch-callout: none) {
+      body {
+        -webkit-text-size-adjust: 100%;
+      }
+    }
+
+    /* Disable animations on low-end devices */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -1592,16 +1690,15 @@
     </div>
 
     <!-- ========================================================
-         SKILLS ARSENAL STAGE (Curved Dome & Scroll-Pinned Runway)
-         Styled exactly like the DesiGamers screenshot with slowed scroll
+         OPTIMIZED SKILLS ARSENAL (Grid Layout - No Empty Space)
          ======================================================== -->
     <div class="arsenal-scroll-runway" id="arsenal">
-      <section class="arsenal-sticky-stage" id="arsenalStickyStage">
+      <section class="arsenal-sticky-stage">
         <!-- Dramatic Spotlights from Top Corners -->
         <div class="stage-spotlight spotlight-left"></div>
         <div class="stage-spotlight spotlight-right"></div>
 
-        <!-- Top Center Holographic Glass Logo Badge (like screenshot) -->
+        <!-- Top Center Holographic Glass Logo Badge -->
         <div class="stage-top-logo-badge">
           <div class="stage-badge-disc" title="aayuvenke🔱 Divine Brand">
             <img src="logo.png" alt="aayuvenke🔱 Logo" />
@@ -1609,314 +1706,306 @@
           </div>
         </div>
 
-        <!-- Section Heading & Scroll Status -->
+        <!-- Section Heading -->
         <div class="stage-heading-block">
           <div class="section-tag">
             <i class="ph-bold ph-lightning"></i>
             Core Capabilities
           </div>
           <h2 class="section-title">The Technical & Creative Arsenal</h2>
-          <div>
-            <span class="scroll-status-pill">
-              <span class="scroll-pulse-dot"></span>
-              <span id="skillProgressText">Scroll Down / Up to Explore Skills</span>
-            </span>
-          </div>
         </div>
 
-        <!-- Scroll-Rolling 3D Arc Track (Controlled by Up/Down Scroll) -->
-        <div class="rolling-carousel-container" id="rollingContainer">
-          <div class="rolling-cards-track" id="rollingTrack">
-            
-            <!-- Card 1: AI Dev & Prompt Whisperer -->
-            <div class="rolling-skill-card" data-index="0">
-              <div class="card-top-row">
-                <div class="card-icon-halo">
-                  <i class="ph-bold ph-brain"></i>
-                </div>
-                <span class="card-category-badge">AI & LLMs</span>
+        <!-- ✅ FIXED: Grid Layout Instead of Scroll Animation -->
+        <div class="skills-grid-container">
+          
+          <!-- Card 1: AI Dev & Prompt Whisperer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo">
+                <i class="ph-bold ph-brain"></i>
               </div>
-              <h3 class="card-title-text">AI Developer & Prompt Whisperer</h3>
-              <p class="card-desc-text">
-                Architecting production-ready LLM workflows, autonomous agent loops, structured reasoning pipelines, and few-shot evals with high precision.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Prompt Whisperer</span>
-                <span class="card-tag-pill">Agents & RAG</span>
-                <span class="card-tag-pill">JSON Schemas</span>
-                <span class="card-tag-pill">Eval Loops</span>
-              </div>
+              <span class="card-category-badge">AI & LLMs</span>
             </div>
-
-            <!-- Card 2: Cyber Expert -->
-            <div class="rolling-skill-card" data-index="1">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); color: var(--desi-green);">
-                  <i class="ph-bold ph-shield-check"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Defense</span>
-              </div>
-              <h3 class="card-title-text">Cyber Security Expert</h3>
-              <p class="card-desc-text">
-                Hardening cloud infrastructure, threat modeling, vulnerability auditing, and designing resilient zero-trust architectures against modern exploits.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Cyber Defense</span>
-                <span class="card-tag-pill">AppSec & PenTest</span>
-                <span class="card-tag-pill">Zero Trust</span>
-                <span class="card-tag-pill">Hardening</span>
-              </div>
+            <h3 class="card-title-text">AI Developer & Prompt Whisperer</h3>
+            <p class="card-desc-text">
+              Architecting production-ready LLM workflows, autonomous agent loops, structured reasoning pipelines, and few-shot evals with high precision.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Prompt Whisperer</span>
+              <span class="card-tag-pill">Agents & RAG</span>
+              <span class="card-tag-pill">JSON Schemas</span>
+              <span class="card-tag-pill">Eval Loops</span>
             </div>
-
-            <!-- Card 3: WebGL Nerd -->
-            <div class="rolling-skill-card" data-index="2">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(0, 210, 255, 0.12); border-color: rgba(0, 210, 255, 0.35); color: var(--shiva-blue);">
-                  <i class="ph-bold ph-cube"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(0, 210, 255, 0.15); color: var(--shiva-blue);">Graphics</span>
-              </div>
-              <h3 class="card-title-text">WebGL Nerd</h3>
-              <p class="card-desc-text">
-                Crafting real-time 3D web experiences, custom GLSL fragment shaders, procedural particle fields, and buttery-smooth 60fps micro-interactions.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Three.js</span>
-                <span class="card-tag-pill">GLSL Shaders</span>
-                <span class="card-tag-pill">Canvas Math</span>
-                <span class="card-tag-pill">Raymarching</span>
-              </div>
-            </div>
-
-            <!-- Card 4: Reel & Video Editor -->
-            <div class="rolling-skill-card" data-index="3">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.35); color: #f472b6;">
-                  <i class="ph-bold ph-film-strip"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(244, 114, 182, 0.15); color: #f472b6;">Video Craft</span>
-              </div>
-              <h3 class="card-title-text">Viral Reel & Video Editor</h3>
-              <p class="card-desc-text">
-                Directing short-form viral reels, seamless kinetic typography, velocity curve sync, and immersive sound design calibrated to capture massive engagement.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Velocity Edits</span>
-                <span class="card-tag-pill">Kinetic Type</span>
-                <span class="card-tag-pill">Sound FX</span>
-                <span class="card-tag-pill">Retention Hooks</span>
-              </div>
-            </div>
-
-            <!-- Card 5: Prompt Engineer -->
-            <div class="rolling-skill-card" data-index="4">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.35); color: var(--shiva-gold);">
-                  <i class="ph-bold ph-terminal"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(251, 191, 36, 0.15); color: var(--shiva-gold);">Precision</span>
-              </div>
-              <h3 class="card-title-text">Prompt Engineer</h3>
-              <p class="card-desc-text">
-                Engineering deterministic prompt protocols, chain-of-thought distillation, system-prompt scaffolding, and benchmark-validated output steering.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Meta-Prompts</span>
-                <span class="card-tag-pill">Chain-of-Thought</span>
-                <span class="card-tag-pill">Few-Shot Bench</span>
-                <span class="card-tag-pill">Safety Rails</span>
-              </div>
-            </div>
-
-            <!-- Card 6: Anime Enjoyer & Edits -->
-            <div class="rolling-skill-card" data-index="5">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.35); color: var(--shiva-violet);">
-                  <i class="ph-bold ph-sparkle"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(129, 140, 248, 0.15); color: var(--shiva-violet);">Culture</span>
-              </div>
-              <h3 class="card-title-text">Anime Enjoyer & Sakuga</h3>
-              <p class="card-desc-text">
-                Deep artistic appreciation for peak anime sakuga animation, expressive character storytelling, and infusing Japanese animation flair into digital media.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Sakuga Frames</span>
-                <span class="card-tag-pill">Otaku Aesthetics</span>
-                <span class="card-tag-pill">Pacing & Flow</span>
-                <span class="card-tag-pill">Cinematography</span>
-              </div>
-            </div>
-
-            <!-- Card 7: Cloud Computing Engineer -->
-            <div class="rolling-skill-card" data-index="6">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--shiva-cyan);">
-                  <i class="ph-bold ph-cloud"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(56, 189, 248, 0.15); color: var(--shiva-cyan);">Infra</span>
-              </div>
-              <h3 class="card-title-text">Cloud Computing Engineer</h3>
-              <p class="card-desc-text">
-                Deploying and scaling resilient cloud infrastructure across AWS, GCP & Azure — from containerized microservices to serverless functions and CI/CD pipelines.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">AWS / GCP / Azure</span>
-                <span class="card-tag-pill">Docker & K8s</span>
-                <span class="card-tag-pill">CI/CD Pipelines</span>
-                <span class="card-tag-pill">Serverless</span>
-              </div>
-            </div>
-
-            <!-- Card 8: Automation Developer -->
-            <div class="rolling-skill-card" data-index="7">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(251, 146, 60, 0.12); border-color: rgba(251, 146, 60, 0.35); color: #fb923c;">
-                  <i class="ph-bold ph-robot"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(251, 146, 60, 0.15); color: #fb923c;">Automation</span>
-              </div>
-              <h3 class="card-title-text">Automation Developer</h3>
-              <p class="card-desc-text">
-                Building self-running Python bots, browser & workflow automations, and scheduled agents that quietly do the repetitive work while I sleep.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Python Bots</span>
-                <span class="card-tag-pill">RPA Workflows</span>
-                <span class="card-tag-pill">Browser Automation</span>
-                <span class="card-tag-pill">Cron & Agents</span>
-              </div>
-            </div>
-
-            <!-- Card 9: Competitive Gamer -->
-            <div class="rolling-skill-card" data-index="8">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(53, 232, 158, 0.12); border-color: rgba(53, 232, 158, 0.35); color: var(--desi-green);">
-                  <i class="ph-bold ph-game-controller"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(53, 232, 158, 0.15); color: var(--desi-green);">Gaming</span>
-              </div>
-              <h3 class="card-title-text">Competitive Gamer</h3>
-              <p class="card-desc-text">
-                Grinding ranked FPS & strategy titles with sharp reflexes, in-game leadership, and a meta-obsessed mindset that carries over into how I approach problem-solving.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">FPS & Strategy</span>
-                <span class="card-tag-pill">High APM</span>
-                <span class="card-tag-pill">Squad IGL</span>
-                <span class="card-tag-pill">Meta Analysis</span>
-              </div>
-            </div>
-
-            <!-- Card 10: Full-Stack Web Developer -->
-            <div class="rolling-skill-card" data-index="9">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(0, 210, 255, 0.12); border-color: rgba(0, 210, 255, 0.35); color: var(--shiva-blue);">
-                  <i class="ph-bold ph-code"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(0, 210, 255, 0.15); color: var(--shiva-blue);">Engineering</span>
-              </div>
-              <h3 class="card-title-text">Full-Stack Web Developer</h3>
-              <p class="card-desc-text">
-                Shipping end-to-end products with React front-ends, Node.js APIs, and well-modeled databases — clean, responsive, and built to actually scale.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">React & Node</span>
-                <span class="card-tag-pill">REST / GraphQL</span>
-                <span class="card-tag-pill">Databases</span>
-                <span class="card-tag-pill">Responsive UI</span>
-              </div>
-            </div>
-
-            <!-- Card 11: Blockchain & Web3 Explorer -->
-            <div class="rolling-skill-card" data-index="10">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.35); color: var(--shiva-gold);">
-                  <i class="ph-bold ph-link"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(251, 191, 36, 0.15); color: var(--shiva-gold);">Web3</span>
-              </div>
-              <h3 class="card-title-text">Blockchain & Web3 Explorer</h3>
-              <p class="card-desc-text">
-                Tinkering with smart contracts, wallet integrations, and on-chain data — exploring the decentralized frontier with a builder's curiosity.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Smart Contracts</span>
-                <span class="card-tag-pill">Wallet Integrations</span>
-                <span class="card-tag-pill">On-Chain Data</span>
-                <span class="card-tag-pill">DeFi Curiosity</span>
-              </div>
-            </div>
-
-            <!-- Card 12: Data & Insights Analyst -->
-            <div class="rolling-skill-card" data-index="11">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.35); color: #f472b6;">
-                  <i class="ph-bold ph-chart-line"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(244, 114, 182, 0.15); color: #f472b6;">Data</span>
-              </div>
-              <h3 class="card-title-text">Data & Insights Analyst</h3>
-              <p class="card-desc-text">
-                Turning raw numbers into decisions — Python & pandas for cleanup, SQL for digging deep, and dashboards that actually tell a story.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Python / Pandas</span>
-                <span class="card-tag-pill">SQL Queries</span>
-                <span class="card-tag-pill">Dashboards</span>
-                <span class="card-tag-pill">Data Storytelling</span>
-              </div>
-            </div>
-
-            <!-- Card 13: UI/UX & Motion Designer -->
-            <div class="rolling-skill-card" data-index="12">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.35); color: var(--shiva-violet);">
-                  <i class="ph-bold ph-palette"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(129, 140, 248, 0.15); color: var(--shiva-violet);">Design</span>
-              </div>
-              <h3 class="card-title-text">UI/UX & Motion Designer</h3>
-              <p class="card-desc-text">
-                Prototyping in Figma, designing systems that stay consistent at scale, and sweating over the micro-interactions that make an interface feel alive.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Figma Prototyping</span>
-                <span class="card-tag-pill">Micro-Interactions</span>
-                <span class="card-tag-pill">Motion Design</span>
-                <span class="card-tag-pill">Design Systems</span>
-              </div>
-            </div>
-
-            <!-- Card 14: Open-Source & Linux Power User -->
-            <div class="rolling-skill-card" data-index="13">
-              <div class="card-top-row">
-                <div class="card-icon-halo" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); color: #34d399;">
-                  <i class="ph-bold ph-terminal-window"></i>
-                </div>
-                <span class="card-category-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Craft</span>
-              </div>
-              <h3 class="card-title-text">Open-Source & Linux Power User</h3>
-              <p class="card-desc-text">
-                Ricing dotfiles, self-hosting personal infra, and living in the terminal — contributing back to open source whenever the itch to fix something hits.
-              </p>
-              <div class="card-tags-cloud">
-                <span class="card-tag-pill">Dotfiles & Ricing</span>
-                <span class="card-tag-pill">Self-Hosting</span>
-                <span class="card-tag-pill">Shell Scripting</span>
-                <span class="card-tag-pill">Git Wizardry</span>
-              </div>
-            </div>
-
           </div>
+
+          <!-- Card 2: Cyber Expert -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); color: var(--desi-green);">
+                <i class="ph-bold ph-shield-check"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Defense</span>
+            </div>
+            <h3 class="card-title-text">Cyber Security Expert</h3>
+            <p class="card-desc-text">
+              Hardening cloud infrastructure, threat modeling, vulnerability auditing, and designing resilient zero-trust architectures against modern exploits.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Cyber Defense</span>
+              <span class="card-tag-pill">AppSec & PenTest</span>
+              <span class="card-tag-pill">Zero Trust</span>
+              <span class="card-tag-pill">Hardening</span>
+            </div>
+          </div>
+
+          <!-- Card 3: WebGL Nerd -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(0, 210, 255, 0.12); border-color: rgba(0, 210, 255, 0.35); color: var(--shiva-blue);">
+                <i class="ph-bold ph-cube"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(0, 210, 255, 0.15); color: var(--shiva-blue);">Graphics</span>
+            </div>
+            <h3 class="card-title-text">WebGL Nerd</h3>
+            <p class="card-desc-text">
+              Crafting real-time 3D web experiences, custom GLSL fragment shaders, procedural particle fields, and buttery-smooth 60fps micro-interactions.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Three.js</span>
+              <span class="card-tag-pill">GLSL Shaders</span>
+              <span class="card-tag-pill">Canvas Math</span>
+              <span class="card-tag-pill">Raymarching</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Reel & Video Editor -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.35); color: #f472b6;">
+                <i class="ph-bold ph-film-strip"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(244, 114, 182, 0.15); color: #f472b6;">Video Craft</span>
+            </div>
+            <h3 class="card-title-text">Viral Reel & Video Editor</h3>
+            <p class="card-desc-text">
+              Directing short-form viral reels, seamless kinetic typography, velocity curve sync, and immersive sound design calibrated to capture massive engagement.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Velocity Edits</span>
+              <span class="card-tag-pill">Kinetic Type</span>
+              <span class="card-tag-pill">Sound FX</span>
+              <span class="card-tag-pill">Retention Hooks</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Prompt Engineer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.35); color: var(--shiva-gold);">
+                <i class="ph-bold ph-terminal"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(251, 191, 36, 0.15); color: var(--shiva-gold);">Precision</span>
+            </div>
+            <h3 class="card-title-text">Prompt Engineer</h3>
+            <p class="card-desc-text">
+              Engineering deterministic prompt protocols, chain-of-thought distillation, system-prompt scaffolding, and benchmark-validated output steering.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Meta-Prompts</span>
+              <span class="card-tag-pill">Chain-of-Thought</span>
+              <span class="card-tag-pill">Few-Shot Bench</span>
+              <span class="card-tag-pill">Safety Rails</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Anime Enjoyer & Edits -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.35); color: var(--shiva-violet);">
+                <i class="ph-bold ph-sparkle"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(129, 140, 248, 0.15); color: var(--shiva-violet);">Culture</span>
+            </div>
+            <h3 class="card-title-text">Anime Enjoyer & Sakuga</h3>
+            <p class="card-desc-text">
+              Deep artistic appreciation for peak anime sakuga animation, expressive character storytelling, and infusing Japanese animation flair into digital media.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Sakuga Frames</span>
+              <span class="card-tag-pill">Otaku Aesthetics</span>
+              <span class="card-tag-pill">Pacing & Flow</span>
+              <span class="card-tag-pill">Cinematography</span>
+            </div>
+          </div>
+
+          <!-- Card 7: Cloud Computing Engineer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--shiva-cyan);">
+                <i class="ph-bold ph-cloud"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(56, 189, 248, 0.15); color: var(--shiva-cyan);">Infra</span>
+            </div>
+            <h3 class="card-title-text">Cloud Computing Engineer</h3>
+            <p class="card-desc-text">
+              Deploying and scaling resilient cloud infrastructure across AWS, GCP & Azure — from containerized microservices to serverless functions and CI/CD pipelines.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">AWS / GCP / Azure</span>
+              <span class="card-tag-pill">Docker & K8s</span>
+              <span class="card-tag-pill">CI/CD Pipelines</span>
+              <span class="card-tag-pill">Serverless</span>
+            </div>
+          </div>
+
+          <!-- Card 8: Automation Developer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(251, 146, 60, 0.12); border-color: rgba(251, 146, 60, 0.35); color: #fb923c;">
+                <i class="ph-bold ph-robot"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(251, 146, 60, 0.15); color: #fb923c;">Automation</span>
+            </div>
+            <h3 class="card-title-text">Automation Developer</h3>
+            <p class="card-desc-text">
+              Building self-running Python bots, browser & workflow automations, and scheduled agents that quietly do the repetitive work while I sleep.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Python Bots</span>
+              <span class="card-tag-pill">RPA Workflows</span>
+              <span class="card-tag-pill">Browser Automation</span>
+              <span class="card-tag-pill">Cron & Agents</span>
+            </div>
+          </div>
+
+          <!-- Card 9: Competitive Gamer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(53, 232, 158, 0.12); border-color: rgba(53, 232, 158, 0.35); color: var(--desi-green);">
+                <i class="ph-bold ph-game-controller"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(53, 232, 158, 0.15); color: var(--desi-green);">Gaming</span>
+            </div>
+            <h3 class="card-title-text">Competitive Gamer</h3>
+            <p class="card-desc-text">
+              Grinding ranked FPS & strategy titles with sharp reflexes, in-game leadership, and a meta-obsessed mindset that carries over into how I approach problem-solving.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">FPS & Strategy</span>
+              <span class="card-tag-pill">High APM</span>
+              <span class="card-tag-pill">Squad IGL</span>
+              <span class="card-tag-pill">Meta Analysis</span>
+            </div>
+          </div>
+
+          <!-- Card 10: Full-Stack Web Developer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(0, 210, 255, 0.12); border-color: rgba(0, 210, 255, 0.35); color: var(--shiva-blue);">
+                <i class="ph-bold ph-code"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(0, 210, 255, 0.15); color: var(--shiva-blue);">Engineering</span>
+            </div>
+            <h3 class="card-title-text">Full-Stack Web Developer</h3>
+            <p class="card-desc-text">
+              Shipping end-to-end products with React front-ends, Node.js APIs, and well-modeled databases — clean, responsive, and built to actually scale.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">React & Node</span>
+              <span class="card-tag-pill">REST / GraphQL</span>
+              <span class="card-tag-pill">Databases</span>
+              <span class="card-tag-pill">Responsive UI</span>
+            </div>
+          </div>
+
+          <!-- Card 11: Blockchain & Web3 Explorer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.35); color: var(--shiva-gold);">
+                <i class="ph-bold ph-link"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(251, 191, 36, 0.15); color: var(--shiva-gold);">Web3</span>
+            </div>
+            <h3 class="card-title-text">Blockchain & Web3 Explorer</h3>
+            <p class="card-desc-text">
+              Tinkering with smart contracts, wallet integrations, and on-chain data — exploring the decentralized frontier with a builder's curiosity.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Smart Contracts</span>
+              <span class="card-tag-pill">Wallet Integrations</span>
+              <span class="card-tag-pill">On-Chain Data</span>
+              <span class="card-tag-pill">DeFi Curiosity</span>
+            </div>
+          </div>
+
+          <!-- Card 12: Data & Insights Analyst -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.35); color: #f472b6;">
+                <i class="ph-bold ph-chart-line"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(244, 114, 182, 0.15); color: #f472b6;">Data</span>
+            </div>
+            <h3 class="card-title-text">Data & Insights Analyst</h3>
+            <p class="card-desc-text">
+              Turning raw numbers into decisions — Python & pandas for cleanup, SQL for digging deep, and dashboards that actually tell a story.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Python / Pandas</span>
+              <span class="card-tag-pill">SQL Queries</span>
+              <span class="card-tag-pill">Dashboards</span>
+              <span class="card-tag-pill">Data Storytelling</span>
+            </div>
+          </div>
+
+          <!-- Card 13: UI/UX & Motion Designer -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.35); color: var(--shiva-violet);">
+                <i class="ph-bold ph-palette"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(129, 140, 248, 0.15); color: var(--shiva-violet);">Design</span>
+            </div>
+            <h3 class="card-title-text">UI/UX & Motion Designer</h3>
+            <p class="card-desc-text">
+              Prototyping in Figma, designing systems that stay consistent at scale, and sweating over the micro-interactions that make an interface feel alive.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Figma Prototyping</span>
+              <span class="card-tag-pill">Micro-Interactions</span>
+              <span class="card-tag-pill">Motion Design</span>
+              <span class="card-tag-pill">Design Systems</span>
+            </div>
+          </div>
+
+          <!-- Card 14: Open-Source & Linux Power User -->
+          <div class="skill-card">
+            <div class="card-top-row">
+              <div class="card-icon-halo" style="background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); color: #34d399;">
+                <i class="ph-bold ph-terminal-window"></i>
+              </div>
+              <span class="card-category-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Craft</span>
+            </div>
+            <h3 class="card-title-text">Open-Source & Linux Power User</h3>
+            <p class="card-desc-text">
+              Ricing dotfiles, self-hosting personal infra, and living in the terminal — contributing back to open source whenever the itch to fix something hits.
+            </p>
+            <div class="card-tags-cloud">
+              <span class="card-tag-pill">Dotfiles & Ricing</span>
+              <span class="card-tag-pill">Self-Hosting</span>
+              <span class="card-tag-pill">Shell Scripting</span>
+              <span class="card-tag-pill">Git Wizardry</span>
+            </div>
+          </div>
+
         </div>
 
-        <!-- The Gigantic Curved Dome (Bottom Horizon like DesiGamers screenshot) -->
+        <!-- The Gigantic Curved Dome (Bottom Horizon) -->
         <div class="curved-dome-wrapper">
           <div class="curved-dome-horizon">
             <div class="dome-ambient-glow"></div>
             <div class="dome-content-inner">
-              <p class="dome-text-lead" id="domeLeadText">
+              <p class="dome-text-lead">
                 Mastering AI architectures, cloud infrastructure, automation pipelines, and cybersecurity shields — propelled by the boundless energy and unshakeable focus of Mahadev.
               </p>
               <p class="dome-text-sub">
@@ -1924,7 +2013,7 @@
               </p>
             </div>
 
-            <!-- Circular Metallic Glass Badge (Matching "10 MILLION STRONG" in screenshot) -->
+            <!-- Circular Metallic Glass Badge -->
             <div class="dome-strong-seal" title="aayuvenke🔱 Elite Craft">
               <span class="seal-label-top">AAYUVENKE🔱</span>
               <span class="seal-title">ELITE<br/>CRAFT</span>
@@ -1985,139 +2074,20 @@
     </div>
   </footer>
 
-  <!-- Real-Time Live Counter & Scroll-Rolling Dome Engine -->
+  <!-- Real-Time Live Counter Engine -->
   <script>
     // ========================================================
-    // 🔴 LIVE STATS CONFIGURATION (Yahan Apne Actual Numbers Daal)
+    // 🔴 LIVE STATS CONFIGURATION
     // ========================================================
     const LIVE_STATS_CONFIG = {
-      followers: 1591,     // <-- Apne Instagram Followers yahan likh
-      posts: 1,            // <-- Apne Instagram Posts yahan likh
-      reelViews: 31,       // <-- Apne Reel ke actual views yahan likh
-    };
-
-    // ========================================================
-    // 🎡 SCROLL-LINKED SKILLS DOME (desigamers.com style)
-    // The section pins in place (position:sticky) while its tall
-    // wrapper is scrolled through — the amount you've scrolled
-    // through that wrapper directly drives which skill card is
-    // front-and-center, so skills swipe in/out exactly in sync
-    // with your scroll, no wheel-hijacking, no autoplay.
-    // ========================================================
-    const initScrollRollingDome = () => {
-      const runway = document.getElementById('arsenal');
-      const stage = document.getElementById('arsenalStickyStage');
-      const track = document.getElementById('rollingTrack');
-      if (!runway || !stage || !track) return;
-
-      const cards = Array.from(document.querySelectorAll('.rolling-skill-card'));
-      const progressText = document.getElementById('skillProgressText');
-      if (cards.length === 0) return;
-
-      const totalCards = cards.length;
-      let ticking = false;
-      let lastFloatIndex = -1;
-
-      const isMobile = () => window.innerWidth < 600;
-
-      // Scale the tall wrapper's height to the number of skills, so the
-      // "slow scroll" pacing per card stays consistent no matter how many
-      // skill cards are added or removed.
-      const perCardVH = isMobile() ? 46 : 58;
-      const minVH = isMobile() ? 260 : 340;
-      runway.style.height = `${Math.max(minVH, totalCards * perCardVH)}vh`;
-
-      // How many px the stage stays pinned for = wrapper height - stage height
-      const getScrollableDistance = () => runway.offsetHeight - stage.offsetHeight;
-
-      // Reads the actual CSS `top` on the sticky stage (differs on mobile)
-      const getStickyOffset = () => parseFloat(getComputedStyle(stage).top) || 0;
-
-      const renderCards = (floatIndex) => {
-        const xStep = isMobile() ? 220 : 315;
-        const curveFactor = isMobile() ? 14 : 22;
-        const powFactor = isMobile() ? 8 : 12;
-        const rotStep = isMobile() ? 5 : 7;
-        const activeIndex = Math.round(floatIndex);
-
-        cards.forEach((card, i) => {
-          const diff = i - floatIndex;
-          const absDiff = Math.abs(diff);
-
-          card.classList.toggle('active-card', i === activeIndex);
-
-          // 3D Arc math: curves cards symmetrically down along the dome horizon
-          const transX = diff * xStep;
-          const lift = Math.max(0, 1 - absDiff * 2) * 15;
-          const transY = absDiff * curveFactor + Math.pow(diff, 2) * powFactor - lift;
-          const rotZ = diff * rotStep;
-          const scale = Math.max(0.72, 1 - absDiff * 0.12);
-          const opacity = Math.max(0, absDiff > 2.4 ? 0 : 1 - absDiff * 0.22);
-          const zIndex = Math.round(200 - absDiff * 10);
-          const blur = absDiff > 2 ? '4px' : '0px';
-
-          card.style.transform = `translateX(${transX}px) translateY(${transY}px) rotate(${rotZ}deg) scale(${scale})`;
-          card.style.zIndex = zIndex;
-          card.style.opacity = opacity;
-          card.style.filter = `blur(${blur})`;
-          card.style.pointerEvents = absDiff > 0.6 ? 'none' : 'auto';
-        });
-
-        if (progressText && activeIndex !== lastFloatIndex) {
-          lastFloatIndex = activeIndex;
-          const titleEl = cards[activeIndex].querySelector('.card-title-text');
-          const label = titleEl ? titleEl.textContent : '';
-          progressText.textContent = `Skill ${activeIndex + 1} / ${totalCards} — ${label}`;
-        }
-      };
-
-      const updateFromScroll = () => {
-        ticking = false;
-        const scrollableDistance = getScrollableDistance();
-
-        if (scrollableDistance <= 0) {
-          renderCards(0);
-          return;
-        }
-
-        const rect = runway.getBoundingClientRect();
-        const stickyOffset = getStickyOffset();
-        let progress = (stickyOffset - rect.top) / scrollableDistance;
-        progress = Math.min(1, Math.max(0, progress));
-
-        const floatIndex = progress * (totalCards - 1);
-        renderCards(floatIndex);
-      };
-
-      const onScroll = () => {
-        if (!ticking) {
-          ticking = true;
-          window.requestAnimationFrame(updateFromScroll);
-        }
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', updateFromScroll);
-
-      // Clicking a card smooth-scrolls the page to that skill's exact scroll position
-      cards.forEach((card, i) => {
-        card.addEventListener('click', () => {
-          const scrollableDistance = getScrollableDistance();
-          if (scrollableDistance <= 0) return;
-          const stickyOffset = getStickyOffset();
-          const targetProgress = i / (totalCards - 1);
-          const runwayTop = runway.getBoundingClientRect().top + window.scrollY;
-          const targetScrollY = runwayTop - stickyOffset + targetProgress * scrollableDistance;
-          window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
-        });
-      });
-
-      updateFromScroll();
+      followers: 1591,
+      posts: 1,
+      reelViews: 31,
     };
 
     // Page initialization
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Start Counter Animation
+      // Start Counter Animation
       const animateCounter = (id, target, suffix = '', duration = 1600) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -2139,9 +2109,6 @@
       animateCounter('followerCount', LIVE_STATS_CONFIG.followers, '+', 1500);
       animateCounter('viewsCount', LIVE_STATS_CONFIG.reelViews, '+', 1600);
       animateCounter('postsCount', LIVE_STATS_CONFIG.posts, '+', 800);
-
-      // 2. Initialize Scroll-Rolling Dome
-      initScrollRollingDome();
     });
   </script>
 
@@ -2153,25 +2120,31 @@
   <script>
     (function () {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
       // ----------------------------------------------------------
       // 1. LENIS — buttery smooth scroll, synced to GSAP's ticker
       // ----------------------------------------------------------
       let lenis = null;
       if (window.Lenis && !prefersReducedMotion) {
-        lenis = new Lenis({
-          duration: 1.15,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-        });
-        if (window.gsap) {
-          gsap.ticker.add((time) => lenis.raf(time * 1000));
-          gsap.ticker.lagSmoothing(0);
-        } else {
-          requestAnimationFrame(function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+        try {
+          lenis = new Lenis({
+            duration: isMobile ? 1.0 : 1.15,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: !isMobile,
+            smoothTouch: false,
           });
+          if (window.gsap) {
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            gsap.ticker.lagSmoothing(0);
+          } else {
+            requestAnimationFrame(function raf(time) {
+              lenis.raf(time);
+              requestAnimationFrame(raf);
+            });
+          }
+        } catch (e) {
+          console.warn('Lenis initialization failed:', e);
         }
       }
 
@@ -2179,311 +2152,332 @@
       // 2. GSAP — letter-by-letter hero text + scroll reveals
       // ----------------------------------------------------------
       if (window.gsap) {
-        gsap.registerPlugin(ScrollTrigger);
-        if (lenis) lenis.on('scroll', ScrollTrigger.update);
+        try {
+          gsap.registerPlugin(ScrollTrigger);
+          if (lenis) lenis.on('scroll', ScrollTrigger.update);
 
-        // Split any element's text into per-character <span class="split-char">
-        const splitChars = (el) => {
-          if (!el) return [];
-          const raw = el.textContent;
-          el.textContent = '';
-          const frag = document.createDocumentFragment();
-          Array.from(raw).forEach((ch) => {
-            const span = document.createElement('span');
-            span.className = 'split-char';
-            span.textContent = ch === ' ' ? '\u00A0' : ch;
-            frag.appendChild(span);
+          const splitChars = (el) => {
+            if (!el) return [];
+            const raw = el.textContent;
+            el.textContent = '';
+            const frag = document.createDocumentFragment();
+            Array.from(raw).forEach((ch) => {
+              const span = document.createElement('span');
+              span.className = 'split-char';
+              span.textContent = ch === ' ' ? '\u00A0' : ch;
+              frag.appendChild(span);
+            });
+            el.appendChild(frag);
+            return el.querySelectorAll('.split-char');
+          };
+
+          const heroTl = gsap.timeline({ delay: 0.15 });
+
+          const welcomeChars = splitChars(document.querySelector('.welcome-script'));
+          if (welcomeChars.length) {
+            heroTl.from(welcomeChars, {
+              opacity: 0, y: 24, rotateX: -60, duration: 0.6,
+              stagger: 0.025, ease: 'back.out(1.6)',
+            }, 0);
+          }
+
+          const brandChars = splitChars(document.querySelector('.hero-brand-name'));
+          if (brandChars.length) {
+            heroTl.from(brandChars, {
+              opacity: 0, y: 50, rotateX: -90, scale: 0.6, duration: 0.9,
+              stagger: 0.045, ease: 'back.out(1.8)',
+            }, 0.15);
+          }
+
+          const authorSub = document.querySelector('.author-sub');
+          const shivaPill = document.querySelector('.shiva-pill');
+          const statCards = gsap.utils.toArray('.insta-stat-box');
+          const journeyBtn = document.querySelector('.journey-button');
+          const heroBadges = gsap.utils.toArray('.hero-pill-tag');
+
+          heroTl
+            .from(shivaPill, { opacity: 0, y: -16, duration: 0.6, ease: 'power2.out' }, 0)
+            .from(authorSub, { opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, 0.5)
+            .from(statCards, { opacity: 0, y: 30, duration: 0.7, stagger: 0.12, ease: 'power3.out' }, 0.6)
+            .from(journeyBtn, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, 0.95)
+            .from(heroBadges, { opacity: 0, x: 30, duration: 0.55, stagger: 0.08, ease: 'power2.out' }, 0.4)
+            .from('.cosmic-shiva-portal', { opacity: 0, scale: 0.7, duration: 1, ease: 'back.out(1.4)' }, 0.2);
+
+          gsap.utils.toArray('.reveal-up').forEach((el) => {
+            gsap.to(el, {
+              opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+              scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+            });
           });
-          el.appendChild(frag);
-          return el.querySelectorAll('.split-char');
-        };
 
-        const heroTl = gsap.timeline({ delay: 0.15 });
+          gsap.utils.toArray('.role-badge').forEach((el, i) => {
+            gsap.from(el, {
+              opacity: 0, y: 16, duration: 0.5, delay: (i % 8) * 0.03, ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 95%', once: true },
+            });
+          });
 
-        const welcomeChars = splitChars(document.querySelector('.welcome-script'));
-        if (welcomeChars.length) {
-          heroTl.from(welcomeChars, {
-            opacity: 0, y: 24, rotateX: -60, duration: 0.6,
-            stagger: 0.025, ease: 'back.out(1.6)',
-          }, 0);
+          // Animate skill cards on scroll
+          gsap.utils.toArray('.skill-card').forEach((card, i) => {
+            gsap.from(card, {
+              opacity: 0, y: 40, duration: 0.8, delay: (i % 3) * 0.1, ease: 'power3.out',
+              scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+            });
+          });
+        } catch (e) {
+          console.warn('GSAP animation failed:', e);
         }
-
-        const brandChars = splitChars(document.querySelector('.hero-brand-name'));
-        if (brandChars.length) {
-          heroTl.from(brandChars, {
-            opacity: 0, y: 50, rotateX: -90, scale: 0.6, duration: 0.9,
-            stagger: 0.045, ease: 'back.out(1.8)',
-          }, 0.15);
-        }
-
-        const authorSub = document.querySelector('.author-sub');
-        const shivaPill = document.querySelector('.shiva-pill');
-        const statCards = gsap.utils.toArray('.insta-stat-box');
-        const journeyBtn = document.querySelector('.journey-button');
-        const heroBadges = gsap.utils.toArray('.hero-pill-tag');
-
-        heroTl
-          .from(shivaPill, { opacity: 0, y: -16, duration: 0.6, ease: 'power2.out' }, 0)
-          .from(authorSub, { opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, 0.5)
-          .from(statCards, { opacity: 0, y: 30, duration: 0.7, stagger: 0.12, ease: 'power3.out' }, 0.6)
-          .from(journeyBtn, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, 0.95)
-          .from(heroBadges, { opacity: 0, x: 30, duration: 0.55, stagger: 0.08, ease: 'power2.out' }, 0.4)
-          .from('.cosmic-shiva-portal', { opacity: 0, scale: 0.7, duration: 1, ease: 'back.out(1.4)' }, 0.2);
-
-        // Fade + rise any .reveal-up element into view once, as it scrolls in
-        gsap.utils.toArray('.reveal-up').forEach((el) => {
-          gsap.to(el, {
-            opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-          });
-        });
-
-        // Gentle stagger for skill/role chips as they enter view
-        gsap.utils.toArray('.role-badge').forEach((el, i) => {
-          gsap.from(el, {
-            opacity: 0, y: 16, duration: 0.5, delay: (i % 8) * 0.03, ease: 'power2.out',
-            scrollTrigger: { trigger: el, start: 'top 95%', once: true },
-          });
-        });
       }
 
       // ----------------------------------------------------------
       // 3. THREE.JS — small glowing 3D Trishul, auto-rotating
-      //    behind the hero logo portal
       // ----------------------------------------------------------
       const trishulCanvas = document.getElementById('trishulCanvas');
-      if (trishulCanvas && window.THREE) {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-        camera.position.set(0, 0.4, 7);
+      if (trishulCanvas && window.THREE && !isMobile) {
+        try {
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+          camera.position.set(0, 0.4, 7);
 
-        const renderer = new THREE.WebGLRenderer({ canvas: trishulCanvas, alpha: true, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        const trishulGroup = new THREE.Group();
-
-        // Shaft
-        const shaftMat = new THREE.MeshStandardMaterial({
-          color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.6, metalness: 0.7, roughness: 0.3,
-        });
-        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 4.4, 16), shaftMat);
-        shaft.position.y = -0.8;
-        trishulGroup.add(shaft);
-
-        // Central prong
-        const prongMat = new THREE.MeshStandardMaterial({
-          color: 0x38bdf8, emissive: 0x00d2ff, emissiveIntensity: 0.9, metalness: 0.5, roughness: 0.25,
-        });
-        const centerProng = new THREE.Mesh(new THREE.ConeGeometry(0.16, 1.9, 16), prongMat);
-        centerProng.position.y = 2.1;
-        trishulGroup.add(centerProng);
-
-        // Side prongs (angled outward)
-        [-1, 1].forEach((side) => {
-          const prong = new THREE.Mesh(new THREE.ConeGeometry(0.14, 1.5, 16), prongMat.clone());
-          prong.position.set(side * 0.55, 1.55, 0);
-          prong.rotation.z = side * -0.38;
-          trishulGroup.add(prong);
-
-          const curveMat = new THREE.MeshStandardMaterial({
-            color: 0x35e89e, emissive: 0x35e89e, emissiveIntensity: 0.7, metalness: 0.6, roughness: 0.3,
+          const renderer = new THREE.WebGLRenderer({ 
+            canvas: trishulCanvas, 
+            alpha: true, 
+            antialias: !isMobile,
+            powerPreference: 'high-performance'
           });
-          const curve = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.9, 12), curveMat);
-          curve.position.set(side * 0.32, 1.05, 0);
-          curve.rotation.z = side * -0.55;
-          trishulGroup.add(curve);
-        });
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Crossbar / base ring near the shaft top
-        const ring = new THREE.Mesh(
-          new THREE.TorusGeometry(0.42, 0.035, 12, 32),
-          new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.7 })
-        );
-        ring.position.y = 1.1;
-        ring.rotation.x = Math.PI / 2;
-        trishulGroup.add(ring);
+          const trishulGroup = new THREE.Group();
 
-        trishulGroup.rotation.z = -0.06;
-        scene.add(trishulGroup);
+          const shaftMat = new THREE.MeshStandardMaterial({
+            color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.6, metalness: 0.7, roughness: 0.3,
+          });
+          const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 4.4, 16), shaftMat);
+          shaft.position.y = -0.8;
+          trishulGroup.add(shaft);
 
-        scene.add(new THREE.AmbientLight(0x223344, 1.1));
-        const key = new THREE.PointLight(0x00d2ff, 3.2, 12);
-        key.position.set(2.5, 3, 4);
-        scene.add(key);
-        const rim = new THREE.PointLight(0xfbbf24, 2.4, 12);
-        rim.position.set(-2.5, -1.5, 3);
-        scene.add(rim);
+          const prongMat = new THREE.MeshStandardMaterial({
+            color: 0x38bdf8, emissive: 0x00d2ff, emissiveIntensity: 0.9, metalness: 0.5, roughness: 0.25,
+          });
+          const centerProng = new THREE.Mesh(new THREE.ConeGeometry(0.16, 1.9, 16), prongMat);
+          centerProng.position.y = 2.1;
+          trishulGroup.add(centerProng);
 
-        const resizeTrishul = () => {
-          const size = trishulCanvas.clientWidth || 340;
-          renderer.setSize(size, size, false);
-          camera.aspect = 1;
-          camera.updateProjectionMatrix();
-        };
-        resizeTrishul();
-        window.addEventListener('resize', resizeTrishul);
+          [-1, 1].forEach((side) => {
+            const prong = new THREE.Mesh(new THREE.ConeGeometry(0.14, 1.5, 16), prongMat.clone());
+            prong.position.set(side * 0.55, 1.55, 0);
+            prong.rotation.z = side * -0.38;
+            trishulGroup.add(prong);
 
-        const clock = new THREE.Clock();
-        const animateTrishul = () => {
-          const t = clock.getElapsedTime();
-          trishulGroup.rotation.y = t * (prefersReducedMotion ? 0 : 0.5);
-          trishulGroup.position.y = Math.sin(t * 0.9) * 0.08;
-          renderer.render(scene, camera);
-          requestAnimationFrame(animateTrishul);
-        };
-        animateTrishul();
+            const curveMat = new THREE.MeshStandardMaterial({
+              color: 0x35e89e, emissive: 0x35e89e, emissiveIntensity: 0.7, metalness: 0.6, roughness: 0.3,
+            });
+            const curve = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.9, 12), curveMat);
+            curve.position.set(side * 0.32, 1.05, 0);
+            curve.rotation.z = side * -0.55;
+            trishulGroup.add(curve);
+          });
+
+          const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(0.42, 0.035, 12, 32),
+            new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.7 })
+          );
+          ring.position.y = 1.1;
+          ring.rotation.x = Math.PI / 2;
+          trishulGroup.add(ring);
+
+          trishulGroup.rotation.z = -0.06;
+          scene.add(trishulGroup);
+
+          scene.add(new THREE.AmbientLight(0x223344, 1.1));
+          const key = new THREE.PointLight(0x00d2ff, 3.2, 12);
+          key.position.set(2.5, 3, 4);
+          scene.add(key);
+          const rim = new THREE.PointLight(0xfbbf24, 2.4, 12);
+          rim.position.set(-2.5, -1.5, 3);
+          scene.add(rim);
+
+          const resizeTrishul = () => {
+            const size = trishulCanvas.clientWidth || 340;
+            renderer.setSize(size, size, false);
+            camera.aspect = 1;
+            camera.updateProjectionMatrix();
+          };
+          resizeTrishul();
+          window.addEventListener('resize', resizeTrishul);
+
+          const clock = new THREE.Clock();
+          const animateTrishul = () => {
+            const t = clock.getElapsedTime();
+            trishulGroup.rotation.y = t * (prefersReducedMotion ? 0 : 0.5);
+            trishulGroup.position.y = Math.sin(t * 0.9) * 0.08;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animateTrishul);
+          };
+          animateTrishul();
+        } catch (e) {
+          console.warn('Three.js Trishul initialization failed:', e);
+        }
       }
 
       // ----------------------------------------------------------
       // 4. GLSL — live fluid/energy shader as the page background
       // ----------------------------------------------------------
       const fluidCanvas = document.getElementById('fluidShaderCanvas');
-      if (fluidCanvas && window.THREE) {
-        const shaderScene = new THREE.Scene();
-        const shaderCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        const shaderRenderer = new THREE.WebGLRenderer({ canvas: fluidCanvas, alpha: true, antialias: false });
-        shaderRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      if (fluidCanvas && window.THREE && !isMobile) {
+        try {
+          const shaderScene = new THREE.Scene();
+          const shaderCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+          const shaderRenderer = new THREE.WebGLRenderer({ 
+            canvas: fluidCanvas, 
+            alpha: true, 
+            antialias: false,
+            powerPreference: 'high-performance'
+          });
+          shaderRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
-        const fluidUniforms = {
-          uTime: { value: 0 },
-          uResolution: { value: new THREE.Vector2(1, 1) },
-        };
+          const fluidUniforms = {
+            uTime: { value: 0 },
+            uResolution: { value: new THREE.Vector2(1, 1) },
+          };
 
-        const fragmentShader = `
-          precision highp float;
-          uniform float uTime;
-          uniform vec2 uResolution;
+          const fragmentShader = `
+            precision highp float;
+            uniform float uTime;
+            uniform vec2 uResolution;
 
-          // Lightweight value-noise based flow field, tinted in the
-          // site's cyan / gold / green palette.
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(
-              mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
-              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-              u.y
-            );
-          }
-          float fbm(vec2 p) {
-            float v = 0.0;
-            float amp = 0.55;
-            for (int i = 0; i < 5; i++) {
-              v += amp * noise(p);
-              p *= 2.0;
-              amp *= 0.5;
+            float hash(vec2 p) {
+              return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
             }
-            return v;
-          }
+            float noise(vec2 p) {
+              vec2 i = floor(p);
+              vec2 f = fract(p);
+              vec2 u = f * f * (3.0 - 2.0 * f);
+              return mix(
+                mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+                mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+                u.y
+              );
+            }
+            float fbm(vec2 p) {
+              float v = 0.0;
+              float amp = 0.55;
+              for (int i = 0; i < 5; i++) {
+                v += amp * noise(p);
+                p *= 2.0;
+                amp *= 0.5;
+              }
+              return v;
+            }
 
-          void main() {
-            vec2 uv = gl_FragCoord.xy / uResolution.xy;
-            vec2 p = uv * 3.0;
-            p.x *= uResolution.x / uResolution.y;
+            void main() {
+              vec2 uv = gl_FragCoord.xy / uResolution.xy;
+              vec2 p = uv * 3.0;
+              p.x *= uResolution.x / uResolution.y;
 
-            float t = uTime * 0.06;
-            vec2 flow = vec2(fbm(p + t), fbm(p - t + 4.2));
-            float density = fbm(p + flow * 1.4 + t * 0.5);
+              float t = uTime * 0.06;
+              vec2 flow = vec2(fbm(p + t), fbm(p - t + 4.2));
+              float density = fbm(p + flow * 1.4 + t * 0.5);
 
-            vec3 cyan = vec3(0.0, 0.82, 1.0);
-            vec3 gold = vec3(0.98, 0.75, 0.14);
-            vec3 green = vec3(0.21, 0.91, 0.62);
-            vec3 deep = vec3(0.01, 0.02, 0.04);
+              vec3 cyan = vec3(0.0, 0.82, 1.0);
+              vec3 gold = vec3(0.98, 0.75, 0.14);
+              vec3 green = vec3(0.21, 0.91, 0.62);
+              vec3 deep = vec3(0.01, 0.02, 0.04);
 
-            vec3 color = mix(deep, cyan, smoothstep(0.25, 0.6, density));
-            color = mix(color, green, smoothstep(0.55, 0.8, density) * 0.6);
-            color = mix(color, gold, smoothstep(0.75, 0.95, density) * 0.5);
+              vec3 color = mix(deep, cyan, smoothstep(0.25, 0.6, density));
+              color = mix(color, green, smoothstep(0.55, 0.8, density) * 0.6);
+              color = mix(color, gold, smoothstep(0.75, 0.95, density) * 0.5);
 
-            float vignette = smoothstep(1.1, 0.2, length(uv - 0.5));
-            color *= vignette;
+              float vignette = smoothstep(1.1, 0.2, length(uv - 0.5));
+              color *= vignette;
 
-            gl_FragColor = vec4(color, density * 0.85);
-          }
-        `;
+              gl_FragColor = vec4(color, density * 0.85);
+            }
+          `;
 
-        const vertexShader = `
-          void main() {
-            gl_Position = vec4(position, 1.0);
-          }
-        `;
+          const vertexShader = `
+            void main() {
+              gl_Position = vec4(position, 1.0);
+            }
+          `;
 
-        const fluidMesh = new THREE.Mesh(
-          new THREE.PlaneGeometry(2, 2),
-          new THREE.ShaderMaterial({
-            uniforms: fluidUniforms,
-            vertexShader,
-            fragmentShader,
-            transparent: true,
-          })
-        );
-        shaderScene.add(fluidMesh);
+          const fluidMesh = new THREE.Mesh(
+            new THREE.PlaneGeometry(2, 2),
+            new THREE.ShaderMaterial({
+              uniforms: fluidUniforms,
+              vertexShader,
+              fragmentShader,
+              transparent: true,
+            })
+          );
+          shaderScene.add(fluidMesh);
 
-        const resizeFluid = () => {
-          const w = window.innerWidth;
-          const h = window.innerHeight;
-          shaderRenderer.setSize(w, h, false);
-          fluidUniforms.uResolution.value.set(w, h);
-        };
-        resizeFluid();
-        window.addEventListener('resize', resizeFluid);
+          const resizeFluid = () => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            shaderRenderer.setSize(w, h, false);
+            fluidUniforms.uResolution.value.set(w, h);
+          };
+          resizeFluid();
+          window.addEventListener('resize', resizeFluid);
 
-        const animateFluid = (t) => {
-          fluidUniforms.uTime.value = t * 0.001;
-          shaderRenderer.render(shaderScene, shaderCamera);
-          requestAnimationFrame(animateFluid);
-        };
-        if (!prefersReducedMotion) requestAnimationFrame(animateFluid);
-        else animateFluid(0);
+          const animateFluid = (t) => {
+            fluidUniforms.uTime.value = t * 0.001;
+            shaderRenderer.render(shaderScene, shaderCamera);
+            requestAnimationFrame(animateFluid);
+          };
+          if (!prefersReducedMotion) requestAnimationFrame(animateFluid);
+          else animateFluid(0);
+        } catch (e) {
+          console.warn('GLSL fluid shader initialization failed:', e);
+        }
       }
 
       // ----------------------------------------------------------
-      // 5. WEB AUDIO — synthesized damru sound + particle burst,
-      //    fired when the cosmic portal is clicked
+      // 5. WEB AUDIO — synthesized damru sound + particle burst
       // ----------------------------------------------------------
       const portal = document.getElementById('cosmicPortal');
       if (portal) {
         let audioCtx = null;
 
         const playDamru = () => {
-          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-          const now = audioCtx.currentTime;
+          try {
+            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
 
-          // Two quick pitched thumps, like a damru's double-beat
-          [0, 0.12].forEach((offset) => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(180, now + offset);
-            osc.frequency.exponentialRampToValueAtTime(60, now + offset + 0.18);
-            gain.gain.setValueAtTime(0.0001, now + offset);
-            gain.gain.exponentialRampToValueAtTime(0.5, now + offset + 0.015);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.22);
-            osc.connect(gain).connect(audioCtx.destination);
-            osc.start(now + offset);
-            osc.stop(now + offset + 0.24);
-          });
+            [0, 0.12].forEach((offset) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(180, now + offset);
+              osc.frequency.exponentialRampToValueAtTime(60, now + offset + 0.18);
+              gain.gain.setValueAtTime(0.0001, now + offset);
+              gain.gain.exponentialRampToValueAtTime(0.5, now + offset + 0.015);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.22);
+              osc.connect(gain).connect(audioCtx.destination);
+              osc.start(now + offset);
+              osc.stop(now + offset + 0.24);
+            });
 
-          // A short burst of filtered noise for the "crack"
-          const bufferSize = audioCtx.sampleRate * 0.12;
-          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-          const data = buffer.getChannelData(0);
-          for (let i = 0; i < bufferSize; i++) {
-            data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+            const bufferSize = audioCtx.sampleRate * 0.12;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+              data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+            }
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            const noiseFilter = audioCtx.createBiquadFilter();
+            noiseFilter.type = 'bandpass';
+            noiseFilter.frequency.value = 900;
+            const noiseGain = audioCtx.createGain();
+            noiseGain.gain.setValueAtTime(0.35, now);
+            noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+            noise.connect(noiseFilter).connect(noiseGain).connect(audioCtx.destination);
+            noise.start(now);
+          } catch (e) {
+            console.warn('Web Audio damru sound failed:', e);
           }
-          const noise = audioCtx.createBufferSource();
-          noise.buffer = buffer;
-          const noiseFilter = audioCtx.createBiquadFilter();
-          noiseFilter.type = 'bandpass';
-          noiseFilter.frequency.value = 900;
-          const noiseGain = audioCtx.createGain();
-          noiseGain.gain.setValueAtTime(0.35, now);
-          noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
-          noise.connect(noiseFilter).connect(noiseGain).connect(audioCtx.destination);
-          noise.start(now);
         };
 
         const spawnParticles = (x, y) => {
