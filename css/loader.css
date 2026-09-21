@@ -1,0 +1,121 @@
+/* ========== LOADER ========== */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #050505;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s var(--ease-out-expo), visibility 0.6s;
+}
+
+.loader.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader__inner {
+    text-align: center;
+    position: relative;
+}
+
+.loader__line {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s, transform 0.4s var(--ease-out-expo);
+}
+
+.loader__line.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.loader__line--1 {
+    margin-bottom: 24px;
+}
+
+.loader__text-init {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: #444;
+    text-transform: uppercase;
+}
+
+.loader__dots span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: #444;
+    animation: loaderDot 1.2s infinite;
+}
+
+.loader__dots span:nth-child(2) { animation-delay: 0.2s; }
+.loader__dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loaderDot {
+    0%, 20% { opacity: 0; }
+    40% { opacity: 1; }
+    60%, 100% { opacity: 0; }
+}
+
+.loader__name {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: #e8e8e8;
+    display: block;
+    position: relative;
+}
+
+.loader__name::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--accent, #00f0ff);
+    transition: width 0.6s var(--ease-out-expo);
+}
+
+.loader__line--2.is-visible .loader__name::after {
+    width: 60px;
+}
+
+.loader__line--3 {
+    margin-top: 32px;
+}
+
+.loader__status {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--accent, #00f0ff);
+    text-transform: uppercase;
+}
+
+.loader__progress {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    border-radius: 1px;
+}
+
+.loader__progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--accent, #00f0ff);
+    transition: width 0.3s linear;
+}

@@ -1,0 +1,132 @@
+/* ========== CONTACT ========== */
+.contact {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.contact__content {
+    max-width: 700px;
+}
+
+.contact__title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.contact__subtitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+    font-weight: 300;
+}
+
+.contact__links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contact__link {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    transition: padding-left 0.4s var(--ease-out-expo);
+}
+
+.contact__link:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.contact__link:hover {
+    padding-left: 12px;
+}
+
+.contact__link-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.contact__link-value {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    flex: 1;
+    transition: color 0.3s;
+}
+
+.contact__link:hover .contact__link-value {
+    color: var(--text-primary);
+}
+
+.contact__link-arrow {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform 0.3s var(--ease-out-expo), color 0.3s;
+}
+
+.contact__link:hover .contact__link-arrow {
+    transform: translateX(8px);
+    color: var(--accent);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    position: relative;
+    z-index: 3;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer__copy,
+.footer__built {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+}
+
+.footer__status {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
