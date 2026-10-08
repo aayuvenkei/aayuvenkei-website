@@ -6,14 +6,9 @@ const ScrollEngine = {
     },
 
     setupReveals() {
-        const reveals = document.querySelectorAll('[data-reveal]');
-        
-        // Force all sections to be visible immediately on load
-        reveals.forEach(el => {
-            el.classList.add('is-revealed');
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
+        // Reveals are driven by VibeEngine (IntersectionObserver + failsafe).
+        // Nothing is force-shown here any more, otherwise every section would
+        // pop in at once and the page would feel flat.
     },
 
     setupProgressBar() {
