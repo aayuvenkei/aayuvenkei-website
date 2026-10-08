@@ -1,11 +1,9 @@
-/* ========== ANIMATIONS & REVEALS (FIXED) ========== */
-
-/* Force elements to be visible so screen is never black */
-[data-reveal] {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
+/* ========== ANIMATIONS & REVEALS ==========
+   Base reveal states now live in css/vibe.css (loaded last).
+   Do NOT force `opacity: 1 !important` here — that kills every
+   scroll animation. VibeEngine has its own IntersectionObserver
+   plus a 4s `no-reveal` failsafe so content can never stay hidden.
+   ======================================================== */
 
 /* What I Build Section Grid */
 .build__grid {

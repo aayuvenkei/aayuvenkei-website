@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAYUVENKEI — Digital Experimenter</title>
+    <title>AAYUVENKEI — Creative Developer &amp; Digital Experimenter</title>
+    <meta name="description" content="AAYUVENKEI builds websites, interfaces, bots and automation that don't sit still. Hand-written HTML, CSS and JavaScript — zero frameworks.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets (vibe.css loads last — it is the top layer) -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/loader.css">
     <link rel="stylesheet" href="css/cursor.css">
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/vibe.css">
 </head>
 <body class="is-loading">
 
@@ -48,10 +50,22 @@
         <div class="cursor__trail"></div>
     </div>
 
+    <!-- ATMOSPHERE -->
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora__blob aurora__blob--a"></span>
+        <span class="aurora__blob aurora__blob--b"></span>
+        <span class="aurora__blob aurora__blob--c"></span>
+    </div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
     <!-- BACKGROUND CANVAS -->
-    <canvas id="smoke-canvas" class="smoke-canvas"></canvas>
-    <canvas id="particle-canvas" class="particle-canvas"></canvas>
-    
+    <canvas id="smoke-canvas" class="smoke-canvas" aria-hidden="true"></canvas>
+    <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- OVERLAYS -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
     <!-- SCROLL PROGRESS -->
     <div class="scroll-progress"><div class="scroll-progress__bar"></div></div>
 
@@ -63,16 +77,17 @@
             </a>
             <div class="nav__links">
                 <a href="#skills" class="nav__link" data-magnetic data-cursor="link">SKILLS<span class="nav__link-indicator"></span></a>
-                <a href="#build" class="nav__link" data-magnetic data-cursor="link">BUILD<span class="nav__link-indicator"></span></a>
                 <a href="#projects" class="nav__link" data-magnetic data-cursor="link">WORK<span class="nav__link-indicator"></span></a>
-                <a href="#system" class="nav__link" data-magnetic data-cursor="link">SYSTEM<span class="nav__link-indicator"></span></a>
+                <a href="#process" class="nav__link" data-magnetic data-cursor="link">PROCESS<span class="nav__link-indicator"></span></a>
+                <a href="#stack" class="nav__link" data-magnetic data-cursor="link">STACK<span class="nav__link-indicator"></span></a>
+                <a href="#live" class="nav__link" data-magnetic data-cursor="link">LIVE<span class="nav__link-indicator"></span></a>
                 <a href="#contact" class="nav__link" data-magnetic data-cursor="link">CONTACT<span class="nav__link-indicator"></span></a>
             </div>
             <div class="nav__actions">
                 <button id="theme-toggle" class="nav__theme-toggle" data-magnetic data-cursor="button" aria-label="Toggle theme">
                     <div class="theme-toggle__track"><div class="theme-toggle__thumb"></div></div>
                 </button>
-                <button id="nav-mobile-toggle" class="nav__mobile-toggle" data-cursor="button"><span></span><span></span><span></span></button>
+                <button id="nav-mobile-toggle" class="nav__mobile-toggle" data-cursor="button" aria-label="Menu"><span></span><span></span><span></span></button>
             </div>
         </div>
     </nav>
@@ -85,8 +100,11 @@
                 <a href="#skills" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">01</span><span class="mobile-nav__link-text">SKILLS</span></a>
                 <a href="#build" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">02</span><span class="mobile-nav__link-text">BUILD</span></a>
                 <a href="#projects" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">03</span><span class="mobile-nav__link-text">WORK</span></a>
-                <a href="#system" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">04</span><span class="mobile-nav__link-text">SYSTEM</span></a>
-                <a href="#contact" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">05</span><span class="mobile-nav__link-text">CONTACT</span></a>
+                <a href="#process" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">04</span><span class="mobile-nav__link-text">PROCESS</span></a>
+                <a href="#stack" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">05</span><span class="mobile-nav__link-text">STACK</span></a>
+                <a href="#system" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">06</span><span class="mobile-nav__link-text">SYSTEM</span></a>
+                <a href="#live" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">07</span><span class="mobile-nav__link-text">LIVE</span></a>
+                <a href="#contact" class="mobile-nav__link" data-mobile-nav-link><span class="mobile-nav__link-number">08</span><span class="mobile-nav__link-text">CONTACT</span></a>
             </div>
             <div class="mobile-nav__footer"><span class="mobile-nav__status">● SYSTEM ONLINE</span></div>
         </div>
@@ -94,12 +112,13 @@
 
     <!-- MAIN CONTENT -->
     <main id="main" class="main">
-        
-        <!-- HERO -->
+
+        <!-- ══════════ HERO ══════════ -->
         <section id="hero" class="section hero">
             <div class="hero__container">
                 <div class="hero__depth-layer hero__depth-layer--1"></div>
                 <div class="hero__depth-layer hero__depth-layer--2"></div>
+
                 <div class="hero__signature">
                     <svg viewBox="0 0 400 400" class="hero__signature-svg">
                         <circle class="hero__sig-orbit hero__sig-orbit--1" cx="200" cy="200" r="120" fill="none" stroke-width="0.5"/>
@@ -111,24 +130,42 @@
                         <line class="hero__sig-cross" x1="200" y1="195" x2="200" y2="205" stroke-width="1"/>
                     </svg>
                 </div>
-                <div class="hero__content">
-                    <div class="hero__label">
-                        <span class="hero__label-line"></span>
-                        <span class="hero__label-text" data-reveal>Creative Developer · Builder · Digital Experimenter</span>
-                        <span class="hero__label-line"></span>
+
+                <span class="hero__rail hero__rail--left">SCROLL — ENTERING AAYUVENKEI.OS</span>
+                <span class="hero__rail hero__rail--right">DELHI · IN — BUILD 2026.10</span>
+
+                <div class="hero__hud" data-reveal>
+                    <div class="hero__hud-group">
+                        <span>IDX/AV</span>
+                        <span class="hero__hud-sep"></span>
+                        <span class="hero__hud-live"><i></i>SYSTEM ONLINE</span>
                     </div>
-                    <h1 class="hero__title" id="hero-title" data-cursor="project">
-                        <span class="hero__title-char" data-hero-char>A</span><span class="hero__title-char" data-hero-char>A</span><span class="hero__title-char" data-hero-char>Y</span><span class="hero__title-char" data-hero-char>U</span><span class="hero__title-char" data-hero-char>V</span><span class="hero__title-char" data-hero-char>E</span><span class="hero__title-char" data-hero-char>N</span><span class="hero__title-char" data-hero-char>K</span><span class="hero__title-char" data-hero-char>E</span><span class="hero__title-char" data-hero-char>I</span>
-                    </h1>
-                    <div class="hero__tagline" data-reveal>
-                        <p class="hero__tagline-text">I turn ideas into digital experiences that feel different.</p>
-                    </div>
-                    <div class="hero__coords" data-reveal>
-                        <span class="hero__coord">LAT 28.6139°</span><span class="hero__coord-sep">—</span>
-                        <span class="hero__coord">LNG 77.2090°</span><span class="hero__coord-sep">—</span>
-                        <span class="hero__coord hero__coord--live" id="hero-time">00:00:00 IST</span>
+                    <div class="hero__hud-group">
+                        <span id="hero-time">00:00:00 IST</span>
+                        <span class="hero__hud-sep"></span>
+                        <span>LAT 28.6139 / LNG 77.2090</span>
                     </div>
                 </div>
+
+                <div class="hero__statement" data-mask>
+                    <span class="hero__digits">0123456789 &nbsp;//&nbsp; PORTFOLIO.V3</span>
+                    <span class="mask"><span class="hero__statement-line" style="--d:.04s">I build things</span></span>
+                    <span class="mask"><span class="hero__statement-line" style="--d:.15s">that don't</span></span>
+                    <span class="mask"><span class="hero__statement-line hero__statement-line--sm" style="--d:.26s"><em class="hero__statement-em">sit</em> still.</span></span>
+                </div>
+
+                <div class="hero__wordmark" data-reveal style="--reveal-delay:.55s">
+                    <h1 class="hero__name" id="hero-title" data-cursor="project"><span class="hero__title-char" data-hero-char>A</span><span class="hero__title-char" data-hero-char>A</span><span class="hero__title-char" data-hero-char>Y</span><span class="hero__title-char" data-hero-char>U</span><span class="hero__title-char" data-hero-char>V</span><span class="hero__title-char" data-hero-char>E</span><span class="hero__title-char" data-hero-char>N</span><span class="hero__title-char" data-hero-char>K</span><span class="hero__title-char" data-hero-char>E</span><span class="hero__title-char" data-hero-char>I</span></h1>
+                    <span class="hero__role">Creative Developer <b>/</b> Digital Experimenter</span>
+                </div>
+
+                <div class="hero__phases" data-reveal style="--reveal-delay:.68s">
+                    <span class="hero__phase"><span class="hero__phase-num">001</span><span class="hero__phase-dot"></span>PHASE/BREAK</span>
+                    <span class="hero__phase"><span class="hero__phase-num">002</span><span class="hero__phase-dot"></span>PHASE/BUILD</span>
+                    <span class="hero__phase"><span class="hero__phase-num">003</span><span class="hero__phase-dot"></span>PHASE/SHIP</span>
+                    <span class="hero__phase"><span class="hero__phase-num">004</span><span class="hero__phase-dot"></span>PHASE/REPEAT</span>
+                </div>
+
                 <div class="hero__scroll" data-reveal>
                     <div class="hero__scroll-line"></div>
                     <span class="hero__scroll-text">SCROLL</span>
@@ -136,15 +173,49 @@
             </div>
         </section>
 
-        <!-- SKILLS -->
-        <section id="skills" class="section skills">
-            <div class="section__container">
-                <div class="section__header" data-reveal>
-                    <span class="section__number">01</span>
-                    <h2 class="section__title">CAPABILITIES</h2>
-                    <span class="section__line"></span>
+        <!-- ══════════ MARQUEE ══════════ -->
+        <div class="marquee marquee--bleed" aria-hidden="true">
+            <div class="marquee__track" style="--speed:44s">
+                <div class="marquee__group">
+                    <span class="marquee__item">Creative Developer</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hollow">Digital Experimenter</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hot">Interface Builder</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item">Canvas Tinkerer</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hollow">Bot Wrangler</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item">Automation Nerd</span><span class="marquee__star">✦</span>
                 </div>
-                <div class="skills__universe" id="skills-universe">
+            </div>
+        </div>
+
+        <!-- ══════════ STATS ══════════ -->
+        <div class="stats">
+            <div class="stat" data-reveal>
+                <div class="stat__value"><span data-count="8840">0</span><span class="stat__suffix">+</span></div>
+                <div class="stat__label">Lines shipped</div>
+            </div>
+            <div class="stat" data-reveal>
+                <div class="stat__value"><span data-count="0">0</span></div>
+                <div class="stat__label">Frameworks used</div>
+            </div>
+            <div class="stat" data-reveal>
+                <div class="stat__value"><span data-count="16">0</span></div>
+                <div class="stat__label">Custom JS engines</div>
+            </div>
+            <div class="stat" data-reveal>
+                <div class="stat__value"><span data-count="4">0</span></div>
+                <div class="stat__label">Public repos</div>
+            </div>
+        </div>
+
+        <!-- ══════════ 01 SKILLS ══════════ -->
+        <section id="skills" class="section">
+            <div class="section__container">
+                <header class="shead" data-reveal>
+                    <span class="shead__index">01 / 08</span>
+                    <h2 class="shead__title">Capabilities</h2>
+                    <span class="shead__meta">Every skill below is something I have actually shipped with.</span>
+                </header>
+                <div class="skills__universe" id="skills-universe" data-reveal>
                     <div class="skills__center" id="skills-center">
                         <span class="skills__center-text">AV</span>
                         <div class="skills__center-pulse"></div>
@@ -160,14 +231,28 @@
             </div>
         </section>
 
-        <!-- WHAT I BUILD -->
-        <section id="build" class="section build">
+        <!-- ══════════ MANIFESTO ══════════ -->
+        <section class="section section--compact manifesto">
+            <div data-mask>
+                <span class="mask"><span class="manifesto__line" style="--d:0s">I don't decorate</span></span>
+                <span class="mask"><span class="manifesto__line manifesto__line--dim" style="--d:.1s">interfaces. I make</span></span>
+                <span class="mask"><span class="manifesto__line" style="--d:.2s">them <em class="serif-accent grad-text">respond.</em></span></span>
+            </div>
+            <div class="manifesto__body">
+                <p class="manifesto__p" data-reveal><b>A website is not a poster.</b> It is a machine that reacts to a person. Every hover, scroll and keystroke is a chance to prove something is alive behind the glass.</p>
+                <p class="manifesto__p" data-reveal><b>I write it by hand.</b> No framework in the way, no build step deciding for me. Just HTML, CSS and JavaScript — small enough to understand completely, fast enough to feel instant.</p>
+                <p class="manifesto__p" data-reveal><b>Then I automate the boring parts.</b> Bots, scrapers and pipelines that keep running after the tab is closed. That is where the real leverage lives.</p>
+            </div>
+        </section>
+
+        <!-- ══════════ 02 WHAT I BUILD ══════════ -->
+        <section id="build" class="section">
             <div class="section__container">
-                <div class="section__header" data-reveal>
-                    <span class="section__number">02</span>
-                    <h2 class="section__title">WHAT I BUILD</h2>
-                    <span class="section__line"></span>
-                </div>
+                <header class="shead" data-reveal>
+                    <span class="shead__index">02 / 08</span>
+                    <h2 class="shead__title">What I build</h2>
+                    <span class="shead__meta">Six things I make on repeat — pick one and I already know the stack.</span>
+                </header>
                 <div class="build__grid">
                     <div class="build__item" data-reveal data-cursor="project">
                         <div class="build__item-bg"></div>
@@ -263,26 +348,107 @@
             </div>
         </section>
 
-        <!-- PROJECTS -->
-        <section id="projects" class="section projects">
+        <!-- ══════════ 03 SELECTED WORK ══════════ -->
+        <section id="projects" class="section">
             <div class="section__container">
-                <div class="section__header" data-reveal>
-                    <span class="section__number">03</span>
-                    <h2 class="section__title">SELECTED WORK</h2>
-                    <span class="section__line"></span>
-                </div>
+                <header class="shead" data-reveal>
+                    <span class="shead__index">03 / 08</span>
+                    <h2 class="shead__title">Selected work</h2>
+                    <span class="shead__meta">Click a row to open the full breakdown.</span>
+                </header>
                 <div class="projects__list" id="projects-list"></div>
             </div>
         </section>
 
-        <!-- AAYUVENKEI.OS -->
-        <section id="system" class="section system">
+        <!-- ══════════ 04 PROCESS ══════════ -->
+        <section id="process" class="section section--compact">
             <div class="section__container">
-                <div class="section__header" data-reveal>
-                    <span class="section__number">04</span>
-                    <h2 class="section__title">AAYUVENKEI.OS</h2>
-                    <span class="section__line"></span>
+                <header class="shead" data-reveal>
+                    <span class="shead__index">04 / 08</span>
+                    <h2 class="shead__title">How it gets built</h2>
+                    <span class="shead__meta">Same four steps, every project. No mystery, no surprises.</span>
+                </header>
+                <div class="process__grid">
+                    <article class="step" data-reveal>
+                        <div class="step__num">01</div>
+                        <div>
+                            <h3 class="step__title">Break</h3>
+                            <p class="step__desc">Tear the idea apart first. What is the one thing this page has to make someone feel? Everything else is decoration.</p>
+                        </div>
+                        <span class="step__tool">research · sketch</span>
+                    </article>
+                    <article class="step" data-reveal>
+                        <div class="step__num">02</div>
+                        <div>
+                            <h3 class="step__title">Blueprint</h3>
+                            <p class="step__desc">Layout, data and motion mapped out before a single line of code. Grid first, glow second.</p>
+                        </div>
+                        <span class="step__tool">wireframe · motion plan</span>
+                    </article>
+                    <article class="step" data-reveal>
+                        <div class="step__num">03</div>
+                        <div>
+                            <h3 class="step__title">Build</h3>
+                            <p class="step__desc">Hand-written HTML, CSS and JavaScript. Small modules, real event buses, nothing hidden behind a framework.</p>
+                        </div>
+                        <span class="step__tool">vanilla · canvas</span>
+                    </article>
+                    <article class="step" data-reveal>
+                        <div class="step__num">04</div>
+                        <div>
+                            <h3 class="step__title">Ship</h3>
+                            <p class="step__desc">Deploy, watch the numbers, sharpen the slow parts. Then start the loop again.</p>
+                        </div>
+                        <span class="step__tool">deploy · measure</span>
+                    </article>
                 </div>
+            </div>
+        </section>
+
+        <!-- ══════════ 05 THE STACK ══════════ -->
+        <section id="stack" class="section section--compact">
+            <div class="section__container">
+                <header class="shead" data-reveal>
+                    <span class="shead__index">05 / 08</span>
+                    <h2 class="shead__title">The stack</h2>
+                    <span class="shead__meta">Everything below runs on this page right now.</span>
+                </header>
+
+                <div class="codestream" id="codestream" data-reveal="clip" aria-hidden="true">
+                    <div class="codestream__label">
+                        <h3>Zero frameworks.<br>Pure intent.</h3>
+                    </div>
+                </div>
+
+                <div class="chips" data-reveal>
+                    <span class="chip">JavaScript</span>
+                    <span class="chip">HTML5</span>
+                    <span class="chip">CSS3</span>
+                    <span class="chip">Canvas 2D</span>
+                    <span class="chip">Python</span>
+                    <span class="chip">Node.js</span>
+                    <span class="chip">REST APIs</span>
+                    <span class="chip">Git &amp; GitHub</span>
+                    <span class="chip">Discord Bots</span>
+                    <span class="chip">Web Scraping</span>
+                    <span class="chip">Automation</span>
+                    <span class="chip">Firebase</span>
+                    <span class="chip">Vercel</span>
+                    <span class="chip">Responsive Design</span>
+                    <span class="chip">UI Animation</span>
+                    <span class="chip">CLI Tools</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════ 06 AAYUVENKEI.OS ══════════ -->
+        <section id="system" class="section">
+            <div class="section__container">
+                <header class="shead" data-reveal>
+                    <span class="shead__index">06 / 08</span>
+                    <h2 class="shead__title">Aayuvenkei.OS</h2>
+                    <span class="shead__meta">The operating layer behind everything on this page.</span>
+                </header>
                 <div class="system__terminal" data-reveal>
                     <div class="system__terminal-header">
                         <div class="system__terminal-dots"><span></span><span></span><span></span></div>
@@ -301,23 +467,140 @@
             </div>
         </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="section contact">
+        <!-- ══════════ 07 LIVE ══════════ -->
+        <section id="live" class="section section--compact">
             <div class="section__container">
-                <div class="contact__content" data-reveal>
-                    <h2 class="contact__title">LET'S BUILD<br>SOMETHING.</h2>
-                    <p class="contact__subtitle">Got an idea? A project? Or just want to talk about the future of the web?</p>
-                    <div class="contact__links">
-                        <a href="mailto:aayuvenkei@gmail.com" class="contact__link" data-magnetic data-cursor="link">
-                            <span class="contact__link-label">EMAIL</span><span class="contact__link-value">aayuvenkei@gmail.com</span><span class="contact__link-arrow">→</span>
-                        </a>
-                        <a href="https://github.com/aayuvenkei" target="_blank" rel="noopener" class="contact__link" data-magnetic data-cursor="link">
-                            <span class="contact__link-label">GITHUB</span><span class="contact__link-value">github.com/aayuvenkei</span><span class="contact__link-arrow">→</span>
-                        </a>
-                        <a href="https://instagram.com/aayuvenkei" target="_blank" rel="noopener" class="contact__link" data-magnetic data-cursor="link">
-                            <span class="contact__link-label">INSTAGRAM</span><span class="contact__link-value">@aayuvenkei</span><span class="contact__link-arrow">→</span>
-                        </a>
+                <header class="shead" data-reveal>
+                    <span class="shead__index">07 / 08</span>
+                    <h2 class="shead__title">Live right now</h2>
+                    <span class="shead__meta">The systems I build keep working after the tab closes.</span>
+                </header>
+
+                <div class="live">
+                    <div class="live__panel" data-reveal="left">
+                        <span class="live__badge"><i></i>Live feed</span>
+                        <div class="live__rpm" id="live-rpm">3,847</div>
+                        <div class="live__rpm-label">Requests per minute</div>
+
+                        <div class="live__bars" aria-hidden="true">
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                            <span class="live__bar"></span><span class="live__bar"></span><span class="live__bar"></span>
+                        </div>
+
+                        <div class="live__meter">
+                            <div class="live__meter-item"><span class="live__meter-v">99.9%</span><span class="live__meter-k">Uptime</span></div>
+                            <div class="live__meter-item"><span class="live__meter-v">12ms</span><span class="live__meter-k">Avg latency</span></div>
+                            <div class="live__meter-item"><span class="live__meter-v">4</span><span class="live__meter-k">Regions</span></div>
+                            <div class="live__meter-item"><span class="live__meter-v">24/7</span><span class="live__meter-k">Autonomy</span></div>
+                        </div>
                     </div>
+
+                    <div class="feed" data-reveal="right">
+                        <div class="feed__head">
+                            <span>Time</span><span>Service</span><span>Task</span><span>Status</span>
+                        </div>
+                        <div class="feed__rows" id="feed-rows"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════ MARQUEE 2 ══════════ -->
+        <div class="marquee marquee--bleed marquee--rev" aria-hidden="true">
+            <div class="marquee__track" style="--speed:52s">
+                <div class="marquee__group">
+                    <span class="marquee__item is-hollow">Web scraping</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item">Data pipelines</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hot">Bot engineering</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hollow">Canvas experiments</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item">Interface design</span><span class="marquee__star">✦</span>
+                    <span class="marquee__item is-hollow">Automation</span><span class="marquee__star">✦</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════ 08 WORK WITH ME ══════════ -->
+        <section id="work" class="section section--compact">
+            <div class="section__container">
+                <header class="shead" data-reveal>
+                    <span class="shead__index">08 / 08</span>
+                    <h2 class="shead__title">Work with me</h2>
+                    <span class="shead__meta">Three ways in. Pick whichever fits.</span>
+                </header>
+                <div class="tiers">
+                    <article class="tier" data-reveal>
+                        <div>
+                            <h3 class="tier__name">Consult</h3>
+                            <p class="tier__price">Free · 30 min</p>
+                        </div>
+                        <ul class="tier__list">
+                            <li>Intro chat and scoping</li>
+                            <li>Code and design review</li>
+                            <li>Stack and tooling advice</li>
+                            <li>Honest project estimate</li>
+                        </ul>
+                        <a href="mailto:aayuvenkei@gmail.com?subject=Consult" class="tier__cta" data-cursor="link"><span>Book a chat</span><span>→</span></a>
+                    </article>
+
+                    <article class="tier tier--hot" data-reveal>
+                        <div>
+                            <h3 class="tier__name">Build</h3>
+                            <p class="tier__price">Per project</p>
+                        </div>
+                        <ul class="tier__list">
+                            <li>Full website or interface, built by hand</li>
+                            <li>Custom motion, cursor and canvas work</li>
+                            <li>Bots, scrapers and automation</li>
+                            <li>Responsive across every screen</li>
+                            <li>Deployment and handover</li>
+                        </ul>
+                        <a href="mailto:aayuvenkei@gmail.com?subject=Project" class="tier__cta" data-cursor="link"><span>Start a project</span><span>→</span></a>
+                    </article>
+
+                    <article class="tier" data-reveal>
+                        <div>
+                            <h3 class="tier__name">Collab</h3>
+                            <p class="tier__price">Ongoing</p>
+                        </div>
+                        <ul class="tier__list">
+                            <li>Dedicated hours each month</li>
+                            <li>Priority fixes and support</li>
+                            <li>New features and experiments</li>
+                            <li>Monitoring and maintenance</li>
+                        </ul>
+                        <a href="mailto:aayuvenkei@gmail.com?subject=Collab" class="tier__cta" data-cursor="link"><span>Let's talk</span><span>→</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════ CONTACT ══════════ -->
+        <section id="contact" class="section section--compact cta">
+            <span class="cta__kicker" data-reveal>— Open for work —</span>
+            <h2 class="cta__title" data-reveal>Let's build<br><em class="serif-accent grad-text">something</em> loud.</h2>
+            <p class="cta__sub" data-reveal>Got an idea, a project, or just want to talk about where the web is going? The inbox is open and I reply fast.</p>
+            <div class="cta__actions" data-reveal>
+                <a href="mailto:aayuvenkei@gmail.com" class="btn-vibe btn-vibe--solid" data-magnetic data-cursor="button"><span>Email me</span><span>→</span></a>
+                <a href="https://github.com/aayuvenkei" target="_blank" rel="noopener" class="btn-vibe" data-magnetic data-cursor="button"><span>GitHub</span><span>↗</span></a>
+            </div>
+
+            <div class="section__container" style="margin-top:clamp(48px,7vw,86px)">
+                <div class="contact__links">
+                    <a href="mailto:aayuvenkei@gmail.com" class="contact__link" data-magnetic data-cursor="link">
+                        <span class="contact__link-label">EMAIL</span><span class="contact__link-value">aayuvenkei@gmail.com</span><span class="contact__link-arrow">→</span>
+                    </a>
+                    <a href="https://github.com/aayuvenkei" target="_blank" rel="noopener" class="contact__link" data-magnetic data-cursor="link">
+                        <span class="contact__link-label">GITHUB</span><span class="contact__link-value">github.com/aayuvenkei</span><span class="contact__link-arrow">→</span>
+                    </a>
+                    <a href="https://instagram.com/aayuvenkei" target="_blank" rel="noopener" class="contact__link" data-magnetic data-cursor="link">
+                        <span class="contact__link-label">INSTAGRAM</span><span class="contact__link-value">@aayuvenkei</span><span class="contact__link-arrow">→</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -328,6 +611,18 @@
             <span class="footer__copy">AAYUVENKEI © 2026</span>
             <span class="footer__built">BUILT WITH CURIOSITY.</span>
             <span class="footer__status"><span class="footer__status-dot"></span>SYSTEM ONLINE</span>
+            <div class="footer__ticker" aria-hidden="true">
+                <div class="marquee marquee--bleed" style="border:0;background:transparent;padding:0">
+                    <div class="marquee__track" style="--speed:36s">
+                        <div class="marquee__group">
+                            <span class="marquee__item" style="font-size:.8rem">No frameworks</span><span class="marquee__star">✦</span>
+                            <span class="marquee__item" style="font-size:.8rem">No excuses</span><span class="marquee__star">✦</span>
+                            <span class="marquee__item" style="font-size:.8rem">Built with curiosity</span><span class="marquee__star">✦</span>
+                            <span class="marquee__item" style="font-size:.8rem">Delhi · IN</span><span class="marquee__star">✦</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -342,7 +637,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS (Added build.js here) -->
+    <!-- SCRIPTS -->
     <script src="js/main.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/cursor.js"></script>
@@ -358,5 +653,6 @@
     <script src="js/projects.js"></script>
     <script src="js/magnetic.js"></script>
     <script src="js/bonus.js"></script>
+    <script src="js/vibe.js"></script>
 </body>
 </html>

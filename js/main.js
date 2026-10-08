@@ -102,6 +102,10 @@ const AV = {
                 if (typeof MagneticEngine !== 'undefined') MagneticEngine.init();
                 if (typeof ThemeEngine !== 'undefined') ThemeEngine.init();
                 if (typeof BonusEngine !== 'undefined') BonusEngine.init();
+
+                // Vibe layer LAST: it owns the real scroll-reveal system,
+                // so it must register after ScrollEngine has run.
+                if (typeof VibeEngine !== 'undefined') VibeEngine.init();
             }, 80);
         });
     }
